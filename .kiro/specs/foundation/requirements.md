@@ -1,4 +1,4 @@
-# foundation — Module Requirements
+# foundation Requirements
 > Slice of docs/requirements.md v2.0 (Baselined). The master wins on any conflict.
 > Change only via CR on the master (§0.3), then re-sync this file.
 
@@ -113,7 +113,9 @@ From `docs/requirements.md` §5.1. `[E]` = exists in DB-001 and is altered. `[N]
 
 ### 5.3 Inverse requirements (from §4.3) — relevant to this slice
 
-- INV-01: let a beneficiary see other beneficiaries, eligibility scores, risk tiers, internal comments or audit logs.
+- INV-01: THE System SHALL NOT let a beneficiary see other beneficiaries, eligibility scores, risk tiers, internal comments or audit logs.
+- INV-05: THE System SHALL NOT let an admin approve or reject an individual application (enforced by the JWT role check on `/decision` — AT-16).
+- INV-08: THE System SHALL NOT allow update or deletion of audit records by any path (API, ORM or DB role) — enforced by D-17 and AC-AUD-02.1.
 
 ---
 
@@ -123,19 +125,20 @@ From `docs/requirements.md` §5.1. `[E]` = exists in DB-001 and is altered. `[N]
 
 **REQ-AUTH-01 Beneficiary self sign-up**
 *User story: As a citizen, I want to create an account so that I can register as a beneficiary and apply.*
-- AC-AUTH-01.1 WHEN `POST /auth/register` is received with a valid username (4–50, `^[a-zA-Z0-9._-]+$`), password (8–72 chars, ≥1 letter and ≥1 digit), fullName, email and optional phone, THE System SHALL create an active app_user with role BENEFICIARY, store a BCrypt hash, and return 201 without a password or hash.
+- AC-AUTH-01.1 WHEN `POST /auth/register` is received with a valid username (4–50, `^[a-zA-Z0-9._-]+$`), password (8–72 chars, ≥1 letter and ≥1 digit), fullName, a valid email address (must contain `@`, a local part ≥ 1 char and a domain with at least one `.`), and optional phone, THE System SHALL create an active app_user with role BENEFICIARY, store a BCrypt hash at strength 12, and return 201 without a password or hash.
 - AC-AUTH-01.2 WHEN the username or email (case-insensitive) already exists, THE System SHALL return 409 `DUPLICATE_RESOURCE`.
 - AC-AUTH-01.3 THE System SHALL NOT allow role, active, id or auth_user_id to be set through this endpoint.
 
 **REQ-AUTH-02 Login**
 - AC-AUTH-02.1 WHEN `POST /auth/login` is received with valid credentials for an active, unlocked user, THE System SHALL return a JWT access token (claims: sub = userId, roles, iat, exp) with 30-minute expiry, plus `expiresAt`.
 - AC-AUTH-02.2 WHEN credentials are invalid, THE System SHALL return 401 `UNAUTHENTICATED` with a message that does not reveal whether the username exists, and SHALL increment failed_login_count.
-- AC-AUTH-02.3 WHEN failed_login_count reaches `auth.maxFailedLogins`, THE System SHALL lock the account for `auth.lockMinutes`, and WHILE locked SHALL return 429 `TOO_MANY_ATTEMPTS`.
-- AC-AUTH-02.4 WHEN login succeeds, THE System SHALL reset failed_login_count and audit `LOGIN_SUCCESS`. Failures SHALL be audited as `LOGIN_FAILURE` (username only).
+- AC-AUTH-02.3 WHEN failed_login_count reaches `auth.maxFailedLogins`, THE System SHALL lock the account for `auth.lockMinutes`, and WHILE locked SHALL return 429 `TOO_MANY_ATTEMPTS`. Login attempts against an already-locked account SHALL NOT further increment failed_login_count; the lock expiry time SHALL NOT be extended.
+- AC-AUTH-02.4 WHEN login succeeds, THE System SHALL reset failed_login_count to 0 and audit `LOGIN_SUCCESS`. Failures SHALL be audited as `LOGIN_FAILURE` (username only).
+- AC-AUTH-02.5 WHEN a locked account's `locked_until` timestamp is in the past and new credentials are presented, THE System SHALL evaluate the credentials normally (treating the account as unlocked), and on success SHALL reset failed_login_count to 0 and clear `locked_until`.
 
 **REQ-AUTH-03 Token enforcement**
 - AC-AUTH-03.1 WHEN a protected endpoint is called without a token, or with an invalid or expired token, THE System SHALL return 401.
-- AC-AUTH-03.2 WHEN the token's user is inactive or deleted, THE System SHALL return 401 (user status cache ≤ 60 s).
+- AC-AUTH-03.2 WHEN the token's user is inactive (`active = false`) or hard-deleted (row absent), THE System SHALL return 401. The user active-status check SHALL be served from a cache with a maximum staleness of 60 s; the cache SHALL be evicted for a user immediately when that user's `active` flag is changed via `PATCH /users/{id}/status`.
 - AC-AUTH-03.3 WHEN the role is not permitted (§4.2), THE System SHALL return 403 `ACCESS_DENIED`.
 - AC-AUTH-03.4 `GET /auth/me` SHALL return the current user's id, username, fullName, role and region scope.
 
@@ -144,14 +147,14 @@ From `docs/requirements.md` §5.1. `[E]` = exists in DB-001 and is altered. `[N]
 ### 8.2 USR — Users, Roles, Regions, Settings
 
 **REQ-USR-01 Staff user management (ADMIN)**
-- AC-USR-01.1 WHEN `POST /users` is received with username, initial password, fullName, email, phone, roleId and regionIds, THE System SHALL create the user and return 201.
+- AC-USR-01.1 WHEN `POST /users` is received with username, initial password, fullName, email, optional phone, roleId and regionIds, THE System SHALL create the user and return 201. Username, password and email validation rules are identical to AC-AUTH-01.1.
 - AC-USR-01.2 THE System SHALL enforce the region binding rules of §4.1. Violations → 422 `INVALID_REGION_BINDING`.
-- AC-USR-01.3 `GET /users` SHALL be paginated with filters `role`, `regionId`, `active`, `q` (name/email contains). `GET /users/{id}` returns a single user (404 if missing).
+- AC-USR-01.3 `GET /users` SHALL be paginated (default page size 20, max 100 per D-09) with filters `role`, `regionId`, `active`, `q` (name/email contains). `GET /users/{id}` returns a single user (404 if missing).
 - AC-USR-01.4 `PUT /users/{id}` SHALL update fullName and phone only. Email, username, id and auth_user_id SHALL NOT be changeable.
-- AC-USR-01.5 `PATCH /users/{id}/status {active}` SHALL activate or deactivate (null active → 400). An admin SHALL NOT deactivate themselves (422).
-- AC-USR-01.6 `DELETE /users/{id}` SHALL delete only users with no workflow or audit references; otherwise 409 `RESOURCE_IN_USE` (D-14). Success → 204.
-- AC-USR-01.7 `PUT /users/{id}/role {roleId}` SHALL replace the user's single role (D-15). 404 for an unknown role.
-- AC-USR-01.8 `PUT /users/{id}/regions {regionIds[]}` SHALL replace region bindings per §4.1.
+- AC-USR-01.5 `PATCH /users/{id}/status {active}` SHALL activate or deactivate (null active → 400 `VALIDATION_FAILED`). An admin SHALL NOT deactivate themselves → 422 `SELF_DEACTIVATION_NOT_ALLOWED`.
+- AC-USR-01.6 `DELETE /users/{id}` SHALL delete only users with no references in any of the following tables: application_status_history, field_report, verification_step, disbursement (released_by), audit_log (actor_id), user_region, user_role; otherwise 409 `RESOURCE_IN_USE` (D-14). Success → 204.
+- AC-USR-01.7 `PUT /users/{id}/role {roleId}` SHALL replace the user's single role (D-15). 404 for an unknown role. IF the user has applications in FIELD_PENDING status assigned to them, THE System SHALL return 422 `RESOURCE_IN_USE` with a message stating that the role cannot be changed while active workflow assignments exist.
+- AC-USR-01.8 `PUT /users/{id}/regions {regionIds[]}` SHALL replace region bindings per §4.1. IF the user is a FIELD_OFFICER with applications currently in FIELD_PENDING assigned to them, THE System SHALL return 422 `RESOURCE_IN_USE` with a message stating that region bindings cannot be changed while active workflow assignments exist.
 - AC-USR-01.9 `GET /users/{id}/roles` SHALL return the assigned roles.
 
 **REQ-USR-02 Roles are read-only**
@@ -160,7 +163,7 @@ From `docs/requirements.md` §5.1. `[E]` = exists in DB-001 and is altered. `[N]
 
 **REQ-USR-03 Regions**
 - AC-USR-03.1 `GET /regions?type=&parentId=` (any authenticated user) and `GET /regions/{id}` SHALL return regions.
-- AC-USR-03.2 ADMIN `POST /regions` and `PUT /regions/{id}` SHALL create or update regions (code `^[A-Z0-9_-]{2,20}$` unique → 409). A region in use SHALL NOT be deleted (no delete endpoint).
+- AC-USR-03.2 ADMIN `POST /regions` and `PUT /regions/{id}` SHALL create or update regions (code `^[A-Z0-9_-]{2,20}$` unique → 409 `DUPLICATE_RESOURCE`). No delete endpoint exists. A region is considered "in use" if it is referenced by any row in `user_region`, `beneficiary`, `scheme_region_budget`, or `application`; attempting to delete an in-use region SHALL return 409 `RESOURCE_IN_USE` (this constraint is enforced implicitly by the absence of a delete endpoint, but the `RegionQueryService.isInUse(Long regionId)` helper SHALL check these four tables).
 
 **REQ-USR-04 System settings (ADMIN)**
 - AC-USR-04.1 `GET /settings` and `PUT /settings/{key} {value}` SHALL read and update settings. The value is validated against value_type (400), and an unknown key → 404.
@@ -173,14 +176,15 @@ From `docs/requirements.md` §5.1. `[E]` = exists in DB-001 and is altered. `[N]
 
 **REQ-AUD-01 Audit writing**
 - AC-AUD-01.1 Every state change SHALL write an audit_log row in the same transaction: user created/updated/role/region/status, login, setting, scheme/criterion/template/budget, beneficiary create/update, application status, score, tier, assignment, field report, verification decision, tranche status, milestone status, flag action, payment instruction and confirmation.
-- AC-AUD-01.2 old_value/new_value SHALL contain changed fields only, with PII masked.
+- AC-AUD-01.2 old_value/new_value SHALL contain changed fields only, with the following PII fields masked: `email` → `j***@example.com` format (first char of local part, then `***`, then `@domain`); `phone` → last 4 digits only (`XXXXXX1234`); `full_name` → not masked (not PII in the audit context); `national_id_hash` and `bank_account_enc` → never appear in audit values (these columns are excluded from change tracking).
 - AC-AUD-01.3 reference_no SHALL be set for every application-related entry. correlation_id = the request's `X-Correlation-Id` (generated if absent, echoed in the response header).
+- AC-AUD-01.4 WHEN an audit entry originates from a scheduled job (e.g., the daily compliance job), THE System SHALL set actor_type = SYSTEM, actor_id = null, and actor_role = 'SYSTEM'. The `AuditService.recordSystem(AuditEntry entry)` method SHALL be used for all job-initiated entries, constructing a synthetic ActorContext with actor_type SYSTEM.
 
 **REQ-AUD-02 Immutability** — per D-17.
 - AC-AUD-02.1 An integration test proves UPDATE and DELETE on audit_log fail for the `gsdts_app` role and via the trigger.
 
 **REQ-AUD-03 Query**
-- AC-AUD-03.1 `GET /audit?referenceNo=&entityType=&entityId=&actorId=&from=&to=` (ADMIN) SHALL be paginated, ordered by occurred_at, id ascending.
+- AC-AUD-03.1 `GET /audit?referenceNo=&entityType=&entityId=&actorId=&from=&to=` (ADMIN) SHALL be paginated (default page size 20, max 100 per D-09), ordered by occurred_at ascending, then id ascending as a tie-breaker.
 - AC-AUD-03.2 No create, update or delete audit endpoints exist.
 
 ---
@@ -217,7 +221,7 @@ From `docs/requirements.md` §11.2:
 | 403 | `ACCESS_DENIED` |
 | 404 | `RESOURCE_NOT_FOUND` |
 | 409 | `DUPLICATE_RESOURCE`, `RESOURCE_IN_USE`, `CONCURRENT_MODIFICATION` |
-| 422 | `INVALID_REGION_BINDING` |
+| 422 | `INVALID_REGION_BINDING`, `SELF_DEACTIVATION_NOT_ALLOWED` |
 | 429 | `TOO_MANY_ATTEMPTS` |
 | 500 | `INTERNAL_ERROR` |
 
@@ -243,6 +247,8 @@ From `docs/requirements.md` §12.2:
 // com.govgrants.subsidygrant.audit.service.AuditService
 // Called by every other slice in the same transaction
 void record(AuditEntry entry, ActorContext actor);
+// For scheduled jobs and system-initiated events (actor_type = SYSTEM)
+void recordSystem(AuditEntry entry);
 
 // com.govgrants.subsidygrant.setting.service.SettingsCacheService
 // Cache ≤ 60 s, evicted on PUT /settings/{key}
@@ -274,7 +280,15 @@ None. `foundation` is the base; it has no upstream slice dependencies.
 
 ---
 
-## 12. Traceability check
+## 12. Known gaps (open questions for master CR)
+
+| Gap | Tables/REQs affected | Note |
+|---|---|---|
+| `api_client` management | Table #24 | Foundation owns the table but no REQ covers creating, rotating keys or deactivating API clients. The integration slice presumably defines usage. Raise a CR if admin management of API clients is needed. |
+
+---
+
+## 13. Traceability check
 
 | ID | Section |
 |---|---|
@@ -287,6 +301,7 @@ None. `foundation` is the base; it has no upstream slice dependencies.
 | AC-AUTH-02.2 | §6 |
 | AC-AUTH-02.3 | §6 |
 | AC-AUTH-02.4 | §6 |
+| AC-AUTH-02.5 | §6 |
 | REQ-AUTH-03 | §6 |
 | AC-AUTH-03.1 | §6 |
 | AC-AUTH-03.2 | §6 |
@@ -316,6 +331,7 @@ None. `foundation` is the base; it has no upstream slice dependencies.
 | AC-AUD-01.1 | §6 |
 | AC-AUD-01.2 | §6 |
 | AC-AUD-01.3 | §6 |
+| AC-AUD-01.4 | §6 |
 | REQ-AUD-02 | §6 |
 | AC-AUD-02.1 | §6 |
 | REQ-AUD-03 | §6 |
@@ -334,4 +350,5 @@ None. `foundation` is the base; it has no upstream slice dependencies.
 | §5.4 settings | §4 |
 | §4.1 roles | §5.1 |
 | §4.2 permission matrix | §5.2 |
+| INV-01, INV-05, INV-08 | §5.3 |
 | AT-07, AT-16, AT-17 | §9 |
