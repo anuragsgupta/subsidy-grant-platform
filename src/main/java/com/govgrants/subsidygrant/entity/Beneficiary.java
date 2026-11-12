@@ -1,5 +1,6 @@
 package com.govgrants.subsidygrant.entity;
 
+import com.govgrants.subsidygrant.auth.domain.AppUser;
 import com.govgrants.subsidygrant.enums.BeneficiaryType;
 import jakarta.persistence.*;
 import lombok.*;

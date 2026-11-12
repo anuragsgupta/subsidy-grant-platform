@@ -12,6 +12,6 @@ import org.springframework.http.HttpStatus;
 public class BusinessRuleException extends BusinessException {
 
     public BusinessRuleException(String errorCode, String message) {
-        super(HttpStatus.UNPROCESSABLE_ENTITY, errorCode, message);
+        super(HttpStatus.UNPROCESSABLE_CONTENT, errorCode, message);
     }
 }

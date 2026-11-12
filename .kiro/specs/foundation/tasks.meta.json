@@ -47,6 +47,28 @@
         "executionId": "6f88e9d2-b4e5-4be5-ae7b-98182dad63ca",
         "chatSessionId": "sess_ab207664-ff69-482e-b4d2-9dad64551129",
         "timestamp": 1794492263399
+      },
+      {
+        "executionId": "97740630-4e56-4109-9cf5-8d1ca1020ab9",
+        "chatSessionId": "sess_c12dcb7b-c7dc-43b8-8ead-6de3352cf60f",
+        "timestamp": 1794512284981
+      },
+      {
+        "executionId": "97740630-4e56-4109-9cf5-8d1ca1020ab9",
+        "chatSessionId": "sess_c12dcb7b-c7dc-43b8-8ead-6de3352cf60f",
+        "timestamp": 1794513079528
+      }
+    ],
+    "5. Auth domain — AppUser entity and repository migration": [
+      {
+        "executionId": "0c7f400a-4d15-4708-86ba-ba31184c1583",
+        "chatSessionId": "sess_15221a14-14a6-41d6-963c-9661d4d5ea58",
+        "timestamp": 1794513723930
+      },
+      {
+        "executionId": "0c7f400a-4d15-4708-86ba-ba31184c1583",
+        "chatSessionId": "sess_15221a14-14a6-41d6-963c-9661d4d5ea58",
+        "timestamp": 1794514402618
       }
     ]
   }

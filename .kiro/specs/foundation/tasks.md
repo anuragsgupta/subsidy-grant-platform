@@ -47,7 +47,7 @@ Implements the base module of GSDTS: authentication, user and region management,
   - AC: AC-AUTH-01.1, AC-USR-01.2, AC-USR-03.2
   - _Requires: 2_
 
-- [~] 4. Common module — shared infrastructure
+- [x] 4. Common module — shared infrastructure
   - Create `com.govgrants.subsidygrant.common.domain.ActorContext` record: `UUID userId, String role, List<Long> regionIds, String correlationId, String ipAddress`; add `hasRole(String)` method and `ActorContext.system(String correlationId)` static factory
   - Create exception hierarchy in `common.exception`: `BusinessException` (abstract, fields HttpStatus + String errorCode), `ResourceNotFoundException` (404 RESOURCE_NOT_FOUND), `DuplicateResourceException` (409 DUPLICATE_RESOURCE), `ResourceInUseException` (409 RESOURCE_IN_USE), `ConcurrentModificationException` (409 CONCURRENT_MODIFICATION), `RegionScopeViolationException` (403 REGION_SCOPE_VIOLATION), `SeparationOfDutiesException` (403 SEPARATION_OF_DUTIES), `BusinessRuleException` (422, accepts named error code), `TooManyAttemptsException` (429 TOO_MANY_ATTEMPTS), `AccessDeniedException` (403 ACCESS_DENIED)
   - Migrate `dto/response/ApiResponse.java` → `common/response/ApiResponse.java`; update all existing imports
@@ -60,7 +60,7 @@ Implements the base module of GSDTS: authentication, user and region management,
   - AC: AC-AUD-01.3, AC-AUTH-03.1
   - _Requires: 1_
 
-- [ ] 5. Auth domain — AppUser entity and repository migration
+- [x] 5. Auth domain — AppUser entity and repository migration
   - Migrate `entity/AppUser.java` → `auth/domain/AppUser.java`; keep all existing fields; add `username` VARCHAR(50) UNIQUE, `passwordHash` VARCHAR(255), `failedLoginCount int default 0`, `lockedUntil Instant`, `@Version long version`; replace `@PrePersist/@PreUpdate` with `@CreationTimestamp/@UpdateTimestamp`; keep `userRoles` as LAZY
   - Migrate `repository/AppUserRepository.java` → `auth/repository/AppUserRepository.java`; keep existing methods; add `findByUsername`, `findByUsernameIgnoreCase`, `existsByUsernameIgnoreCase`, `existsByEmailIgnoreCase`, `findByIdWithRoles` (JOIN FETCH userRoles → role), `findByUsernameWithRoles` (JOIN FETCH)
   - Migrate `entity/Role.java` → `user/domain/Role.java` (no structural changes)
