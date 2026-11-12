@@ -1,0 +1,53 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1. Bootstrap pom.xml and project Java version": [
+      {
+        "executionId": "a5e2a660-1115-4fc4-a6cb-78ebe32b2267",
+        "chatSessionId": "sess_5d756711-9f98-4c84-bade-e9276a39b22a",
+        "timestamp": 1794391861695
+      },
+      {
+        "executionId": "a5e2a660-1115-4fc4-a6cb-78ebe32b2267",
+        "chatSessionId": "sess_5d756711-9f98-4c84-bade-e9276a39b22a",
+        "timestamp": 1794395782576
+      }
+    ],
+    "2. Flyway migration V1 — baseline schema": [
+      {
+        "executionId": "4053467b-575d-4b9b-8c82-2e527949c081",
+        "chatSessionId": "sess_793da308-76e7-45f3-9527-ff352d3b3f1f",
+        "timestamp": 1794406196162
+      },
+      {
+        "executionId": "4053467b-575d-4b9b-8c82-2e527949c081",
+        "chatSessionId": "sess_793da308-76e7-45f3-9527-ff352d3b3f1f",
+        "timestamp": 1794407330824
+      }
+    ],
+    "3. Flyway migration V2 — foundation auth schema": [
+      {
+        "executionId": "37fda80e-e60d-470d-9ad7-adebe0de201f",
+        "chatSessionId": "sess_80c3f95f-8182-4e93-bfeb-9604d989b49c",
+        "timestamp": 1794487480182
+      },
+      {
+        "executionId": "37fda80e-e60d-470d-9ad7-adebe0de201f",
+        "chatSessionId": "sess_80c3f95f-8182-4e93-bfeb-9604d989b49c",
+        "timestamp": 1794487651778
+      }
+    ],
+    "4. Common module — shared infrastructure": [
+      {
+        "executionId": "236a6f82-45d0-47ba-a658-4ad4c1cab035",
+        "chatSessionId": "sess_067d89e8-d089-48bd-8f81-8f45400b0e9c",
+        "timestamp": 1794487810290
+      },
+      {
+        "executionId": "6f88e9d2-b4e5-4be5-ae7b-98182dad63ca",
+        "chatSessionId": "sess_ab207664-ff69-482e-b4d2-9dad64551129",
+        "timestamp": 1794492263399
+      }
+    ]
+  }
+}

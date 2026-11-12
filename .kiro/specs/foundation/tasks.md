@@ -6,7 +6,7 @@ Implements the base module of GSDTS: authentication, user and region management,
 
 ## Tasks
 
-- [ ] 1. Bootstrap pom.xml and project Java version
+- [x] 1. Bootstrap pom.xml and project Java version
   - Change `<java.version>17</java.version>` to `<java.version>21</java.version>` (D-01)
   - Uncomment `spring-boot-starter-security` and `spring-boot-starter-security-test`
   - Add `spring-boot-starter-oauth2-resource-server` (BOM-managed)
@@ -21,7 +21,7 @@ Implements the base module of GSDTS: authentication, user and region management,
   - REQ: D-01, NFR-01, NFR-05, NFR-07, NFR-08
   - AC: N/A — build prerequisite
 
-- [ ] 2. Flyway migration V1 — baseline schema
+- [x] 2. Flyway migration V1 — baseline schema
   - Create `src/main/resources/db/migration/V1__baseline.sql` reproducing the DB-001 schema (6 tables: `app_user`, `role`, `user_role`, `scheme`, `beneficiary`, `application`) with the timestamp trigger, indexes, and seed data
   - Omit the `auth_user_id → auth.users` FK (Supabase-only; `auth` schema absent in Docker/Testcontainers)
   - Create `src/main/resources/application.yml`: datasource from env vars, `ddl-auto=validate`, flyway config (`baseline-on-migrate=true`, `out-of-order=false`), `app.jwt.*`, `app.security.*`, logging pattern with `%X{correlationId}`, `open-in-view=false`, Jackson `write-dates-as-timestamps=false`
@@ -32,7 +32,7 @@ Implements the base module of GSDTS: authentication, user and region management,
   - AC: N/A — migration prerequisite
   - _Requires: 1_
 
-- [ ] 3. Flyway migration V2 — foundation auth schema
+- [x] 3. Flyway migration V2 — foundation auth schema
   - Create `src/main/resources/db/migration/V202611070001__foundation_auth_schema.sql`
   - `ALTER TABLE app_user ADD COLUMN IF NOT EXISTS`: `username VARCHAR(50) UNIQUE`, `password_hash VARCHAR(255)`, `failed_login_count INT NOT NULL DEFAULT 0`, `locked_until TIMESTAMPTZ`, `version BIGINT NOT NULL DEFAULT 0`
   - `CREATE TABLE region` (id BIGSERIAL PK, code UNIQUE with CHECK `^[A-Z0-9_-]{2,20}$`, name, type CHECK IN ('STATE','DISTRICT'), parent_id FK self RESTRICT, created_at, updated_at, version; constraint DISTRICT must have parent_id NOT NULL)
@@ -47,7 +47,7 @@ Implements the base module of GSDTS: authentication, user and region management,
   - AC: AC-AUTH-01.1, AC-USR-01.2, AC-USR-03.2
   - _Requires: 2_
 
-- [ ] 4. Common module — shared infrastructure
+- [~] 4. Common module — shared infrastructure
   - Create `com.govgrants.subsidygrant.common.domain.ActorContext` record: `UUID userId, String role, List<Long> regionIds, String correlationId, String ipAddress`; add `hasRole(String)` method and `ActorContext.system(String correlationId)` static factory
   - Create exception hierarchy in `common.exception`: `BusinessException` (abstract, fields HttpStatus + String errorCode), `ResourceNotFoundException` (404 RESOURCE_NOT_FOUND), `DuplicateResourceException` (409 DUPLICATE_RESOURCE), `ResourceInUseException` (409 RESOURCE_IN_USE), `ConcurrentModificationException` (409 CONCURRENT_MODIFICATION), `RegionScopeViolationException` (403 REGION_SCOPE_VIOLATION), `SeparationOfDutiesException` (403 SEPARATION_OF_DUTIES), `BusinessRuleException` (422, accepts named error code), `TooManyAttemptsException` (429 TOO_MANY_ATTEMPTS), `AccessDeniedException` (403 ACCESS_DENIED)
   - Migrate `dto/response/ApiResponse.java` → `common/response/ApiResponse.java`; update all existing imports
