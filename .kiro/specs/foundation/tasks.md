@@ -73,7 +73,7 @@ Implements the base module of GSDTS: authentication, user and region management,
   - AC: AC-AUTH-01.1, AC-AUTH-02.1, AC-AUTH-02.3, AC-USR-01.7
   - _Requires: 3, 4_
 
-- [ ] 6. User module — Region entity and repository
+- [x] 6. User module — Region entity and repository
   - Create `user/domain/RegionType` enum: STATE, DISTRICT
   - Create `user/domain/Region` entity: id Long (IDENTITY), code, name, RegionType type, Long parentId, @CreationTimestamp createdAt, @UpdateTimestamp updatedAt, @Version long version
   - Create `user/domain/UserRegionId` @Embeddable: UUID userId, Long regionId with equals/hashCode
@@ -85,7 +85,7 @@ Implements the base module of GSDTS: authentication, user and region management,
   - AC: AC-USR-01.2, AC-USR-03.2
   - _Requires: 5_
 
-- [ ] 7. User module — SystemSetting entity and SettingsCacheService
+- [x] 7. User module — SystemSetting entity and SettingsCacheService
   - Create `user/domain/SettingValueType` enum: INT, MONEY, ENUM, BOOL
   - Create `user/domain/SystemSetting` entity: @Id String key, String value, SettingValueType valueType, String description, UUID updatedBy, @CreationTimestamp createdAt, @UpdateTimestamp updatedAt (no @Version)
   - Create `user/repository/SystemSettingRepository` extending JpaRepository<SystemSetting, String> (no custom methods needed)
@@ -95,7 +95,7 @@ Implements the base module of GSDTS: authentication, user and region management,
   - AC: AC-USR-04.1, AC-USR-04.3
   - _Requires: 5_
 
-- [ ] 8. Audit module — AuditLog entity, AuditService, PiiMaskingUtil
+- [x] 8. Audit module — AuditLog entity, AuditService, PiiMaskingUtil
   - Create `audit/domain/ActorType` enum: USER, SYSTEM, API_CLIENT
   - Create `audit/domain/AuditLog` entity: id Long (IDENTITY), all columns from design §3.1 (occurredAt, actorId nullable UUID, actorRole, actorType, action, entityType, entityId, referenceNo, oldValue JSONB string, newValue JSONB string, remark, correlationId, ipAddress, @CreationTimestamp createdAt); all fields updatable=false; no @Version, no updated_at
   - Create `audit/domain/ApiClient` entity: UUID id, name, keyHash, active boolean, @CreationTimestamp createdAt, @UpdateTimestamp updatedAt, @Version long version
@@ -113,7 +113,7 @@ Implements the base module of GSDTS: authentication, user and region management,
   - AC: AC-AUD-01.1, AC-AUD-01.2, AC-AUD-01.3, AC-AUD-01.4, AC-AUD-03.1, AC-AUD-03.2
   - _Requires: 4, 5_
 
-- [ ] 9. Security configuration, JwtService, audit schema migration
+- [x] 9. Security configuration, JwtService, audit schema migration
   - Create `src/main/resources/db/migration/V202611070007__foundation_audit_schema.sql`: CREATE TABLE audit_log (all columns from design §2.3), CREATE TABLE api_client, CREATE TABLE shedlock (standard DDL); create indexes `idx_audit_log_reference_no` and `idx_audit_log_entity`; GRANT SELECT/INSERT ON audit_log TO gsdts_app; REVOKE UPDATE/DELETE/TRUNCATE ON audit_log FROM gsdts_app; GRANT SELECT/INSERT/UPDATE/DELETE on api_client and shedlock; GRANT USAGE/SELECT on audit_log_id_seq; CREATE FUNCTION `audit_log_immutability()` raising exception; CREATE TRIGGER `trg_audit_log_immutable` BEFORE UPDATE OR DELETE
   - Create `auth/service/JwtService` (@Service): inject `@Value("${app.jwt.secret}")` and `@Value("${app.jwt.expiration-minutes:30}")`; use JJWT 0.12.x (`Keys.hmacShaKeyFor`, `Jwts.builder()`, `Jwts.parser()`); implement `generateToken(AppUser)` with claims sub=userId, roles=[roleName], iat, exp; implement `extractUserId`, `extractRole`, `isTokenValid` (catch JwtException → false), `isTokenExpired`
   - Create `auth/service/UserStatusCache` (@Component): Caffeine Cache<UUID,Boolean> TTL 60s; `isActive(UUID)` loading from AppUserRepository on miss (return false if absent); `evict(UUID)` calling cache.invalidate
@@ -124,7 +124,7 @@ Implements the base module of GSDTS: authentication, user and region management,
   - AC: AC-AUTH-02.1, AC-AUTH-03.1, AC-AUTH-03.2, AC-AUTH-03.3, AC-AUD-02.1
   - _Requires: 3, 4, 7, 8_
 
-- [ ] 10. Auth service — registration and login
+- [x] 10. Auth service — registration and login
   - Create `auth/api/RegisterRequest` record: @NotBlank @Size(4-50) @Pattern(^[a-zA-Z0-9._-]+$) username, @NotBlank @Size(8-72) password, @NotBlank @Size(2-150) fullName, @NotBlank @Email email, @Pattern(^(\+91)?[6-9]\d{9}$) phone
   - Create `auth/api/LoginRequest` record: @NotBlank username, @NotBlank password
   - Create `auth/api/TokenResponse` record: accessToken, tokenType, Instant expiresAt
@@ -153,7 +153,7 @@ Implements the base module of GSDTS: authentication, user and region management,
   - AC: AC-USR-01.1, AC-USR-01.2, AC-USR-01.3, AC-USR-01.4, AC-USR-01.5, AC-USR-01.6, AC-USR-01.7, AC-USR-01.8, AC-USR-01.9, AC-USR-02.1, AC-USR-02.2, AC-USR-03.1, AC-USR-03.2, AC-USR-04.1, AC-USR-04.2, AC-USR-04.3
   - _Requires: 6, 7, 8, 9, 10_
 
-- [ ] 12. Unit tests — AuthService, JwtService, UserService, RegionService, SettingsCacheService
+- [~] 12. Unit tests — AuthService, JwtService, UserService, RegionService, SettingsCacheService
   - Create `AuthServiceTest` (Mockito, no Spring context, no DB): mock AppUserRepository, UserRoleRepository, RoleRepository, PasswordEncoder, JwtService, AuditService, SettingsCacheService; write tests: `AC_AUTH_02_3_locksAccountAfterMaxFailedAttempts`, `AC_AUTH_02_3_returnsLockedWhileLockedUntilInFuture`, `AC_AUTH_02_3_doesNotExtendLockOnSubsequentAttempts`, `AC_AUTH_02_5_unlocksAndResetsCountWhenLockExpired`, `AC_AUTH_02_4_resetsFailedCountOnSuccessfulLogin`, `AC_AUTH_01_1_throwsDuplicateOnExistingUsername`, `AC_AUTH_01_1_throwsDuplicateOnExistingEmail`
   - Create `JwtServiceTest` (JUnit 5, real 256-bit test secret): `generatesTokenWithCorrectClaims_userId_role_expiry`, `validatesTokenSuccessfully`, `rejectsExpiredToken` (expirationMinutes=-1), `rejectsTamperedToken`, `extractsUserIdFromValidToken`
   - Create `UserServiceTest` (Mockito): `AC_USR_01_5_throwsWhenAdminDeactivatesThemself`, `AC_USR_01_7_throwsWhenRoleChangedWithActiveFieldPendingAssignments`, `AC_USR_01_8_throwsWhenRegionsChangedWithActiveFieldPendingAssignments`, `AC_USR_01_6_throwsResourceInUseWhenUserHasAuditReferences`, `AC_USR_01_2_throwsOnInvalidRegionBinding_fieldOfficerNoDistrict`, `AC_USR_01_2_throwsOnInvalidRegionBinding_districtOfficerMultipleDistricts`
@@ -164,7 +164,7 @@ Implements the base module of GSDTS: authentication, user and region management,
   - AC: AC-AUTH-01.1, AC-AUTH-01.2, AC-AUTH-02.3, AC-AUTH-02.5, AC-USR-01.2, AC-USR-01.5, AC-USR-01.6, AC-USR-01.7, AC-USR-01.8, AC-USR-04.3
   - _Requires: 10, 11_
 
-- [ ] 13. Integration tests — AuthController and AuditImmutability
+- [~] 13. Integration tests — AuthController and AuditImmutability
   - Create `BaseIT` annotated @SpringBootTest(webEnvironment=RANDOM_PORT) @Testcontainers: declare static PostgreSQLContainer<>("postgres:15"); use @DynamicPropertySource to override datasource properties; set flyway.baseline-on-migrate=false and out-of-order=true for test profile
   - Create `AuthControllerIT` extending BaseIT with @AutoConfigureMockMvc and MockMvc injection; implement: `AC_AUTH_01_1_registersNewBeneficiaryAndReturns201` (assert 201, response has no password field, DB row exists), `AC_AUTH_01_2_returns409OnDuplicateUsername`, `AC_AUTH_01_2_returns409OnDuplicateEmail_caseInsensitive`, `AC_AUTH_01_3_ignoresClientSuppliedRoleAndActive` (verify role=BENEFICIARY active=true in DB), `AC_AUTH_02_1_returnsJwtOnValidCredentials` (decode Base64 and verify sub), `AC_AUTH_02_2_returns401OnBadPassword_withoutRevealingExistence`, `AC_AUTH_02_3_returns429AfterMaxFailedAttempts` (set maxFailedLogins=3 in DB), `AC_AUTH_02_5_unlocksAfterLockPeriodExpires` (set locked_until to past via JdbcTemplate), `AC_AUTH_03_1_returns401WithNoToken`, `AC_AUTH_03_1_returns401WithExpiredToken`, `AC_AUTH_03_3_returns403WhenRoleNotPermitted` (BENEFICIARY calling POST /users), `AC_AUTH_03_4_getMeReturnsCurrentUserProfile`, `AT_17_unauthenticatedCallToProtectedEndpointReturns401`, `AT_17_wrongRoleReturns403`
   - Create `AuditImmutabilityIT` extending BaseIT: create a secondary DataSource connecting as `gsdts_app` role; implement `AT_07_insertAuditLogSucceedsForGsdtsAppRole` (positive case), `AT_07_updateAuditLogThrowsExceptionViaTrigger` (assert DataAccessException), `AT_07_deleteAuditLogThrowsExceptionViaTrigger` (assert DataAccessException)

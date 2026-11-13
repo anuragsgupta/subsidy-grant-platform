@@ -70,6 +70,117 @@
         "chatSessionId": "sess_15221a14-14a6-41d6-963c-9661d4d5ea58",
         "timestamp": 1794514402618
       }
+    ],
+    "6. User module — Region entity and repository": [
+      {
+        "executionId": "99734f9a-1b15-419a-b665-d0f1a47ffbb5",
+        "chatSessionId": "sess_322cdd20-e957-42f0-98a7-d6b3718b479c",
+        "timestamp": 1794514585987
+      },
+      {
+        "executionId": "99734f9a-1b15-419a-b665-d0f1a47ffbb5",
+        "chatSessionId": "sess_322cdd20-e957-42f0-98a7-d6b3718b479c",
+        "timestamp": 1794514956951
+      },
+      {
+        "executionId": "99734f9a-1b15-419a-b665-d0f1a47ffbb5",
+        "chatSessionId": "sess_322cdd20-e957-42f0-98a7-d6b3718b479c",
+        "timestamp": 1794515361854
+      }
+    ],
+    "7. User module — SystemSetting entity and SettingsCacheService": [
+      {
+        "executionId": "99734f9a-1b15-419a-b665-d0f1a47ffbb5",
+        "chatSessionId": "sess_322cdd20-e957-42f0-98a7-d6b3718b479c",
+        "timestamp": 1794514586092
+      },
+      {
+        "executionId": "99734f9a-1b15-419a-b665-d0f1a47ffbb5",
+        "chatSessionId": "sess_322cdd20-e957-42f0-98a7-d6b3718b479c",
+        "timestamp": 1794515380352
+      },
+      {
+        "executionId": "99734f9a-1b15-419a-b665-d0f1a47ffbb5",
+        "chatSessionId": "sess_322cdd20-e957-42f0-98a7-d6b3718b479c",
+        "timestamp": 1794515759251
+      }
+    ],
+    "8. Audit module — AuditLog entity, AuditService, PiiMaskingUtil": [
+      {
+        "executionId": "99734f9a-1b15-419a-b665-d0f1a47ffbb5",
+        "chatSessionId": "sess_322cdd20-e957-42f0-98a7-d6b3718b479c",
+        "timestamp": 1794514586161
+      },
+      {
+        "executionId": "99734f9a-1b15-419a-b665-d0f1a47ffbb5",
+        "chatSessionId": "sess_322cdd20-e957-42f0-98a7-d6b3718b479c",
+        "timestamp": 1794515775881
+      },
+      {
+        "executionId": "99734f9a-1b15-419a-b665-d0f1a47ffbb5",
+        "chatSessionId": "sess_322cdd20-e957-42f0-98a7-d6b3718b479c",
+        "timestamp": 1794516296591
+      }
+    ],
+    "9. Security configuration, JwtService, audit schema migration": [
+      {
+        "executionId": "99734f9a-1b15-419a-b665-d0f1a47ffbb5",
+        "chatSessionId": "sess_322cdd20-e957-42f0-98a7-d6b3718b479c",
+        "timestamp": 1794514586222
+      },
+      {
+        "executionId": "99734f9a-1b15-419a-b665-d0f1a47ffbb5",
+        "chatSessionId": "sess_322cdd20-e957-42f0-98a7-d6b3718b479c",
+        "timestamp": 1794516308018
+      },
+      {
+        "executionId": "99734f9a-1b15-419a-b665-d0f1a47ffbb5",
+        "chatSessionId": "sess_322cdd20-e957-42f0-98a7-d6b3718b479c",
+        "timestamp": 1794517807606
+      }
+    ],
+    "10. Auth service — registration and login": [
+      {
+        "executionId": "99734f9a-1b15-419a-b665-d0f1a47ffbb5",
+        "chatSessionId": "sess_322cdd20-e957-42f0-98a7-d6b3718b479c",
+        "timestamp": 1794514586316
+      },
+      {
+        "executionId": "99734f9a-1b15-419a-b665-d0f1a47ffbb5",
+        "chatSessionId": "sess_322cdd20-e957-42f0-98a7-d6b3718b479c",
+        "timestamp": 1794517855490
+      },
+      {
+        "executionId": "99734f9a-1b15-419a-b665-d0f1a47ffbb5",
+        "chatSessionId": "sess_322cdd20-e957-42f0-98a7-d6b3718b479c",
+        "timestamp": 1794518533786
+      }
+    ],
+    "11. User module — services, controllers, and DTOs": [
+      {
+        "executionId": "99734f9a-1b15-419a-b665-d0f1a47ffbb5",
+        "chatSessionId": "sess_322cdd20-e957-42f0-98a7-d6b3718b479c",
+        "timestamp": 1794514586379
+      },
+      {
+        "executionId": "99734f9a-1b15-419a-b665-d0f1a47ffbb5",
+        "chatSessionId": "sess_322cdd20-e957-42f0-98a7-d6b3718b479c",
+        "timestamp": 1794518551236
+      }
+    ],
+    "12. Unit tests — AuthService, JwtService, UserService, RegionService, SettingsCacheService": [
+      {
+        "executionId": "99734f9a-1b15-419a-b665-d0f1a47ffbb5",
+        "chatSessionId": "sess_322cdd20-e957-42f0-98a7-d6b3718b479c",
+        "timestamp": 1794514586443
+      }
+    ],
+    "13. Integration tests — AuthController and AuditImmutability": [
+      {
+        "executionId": "99734f9a-1b15-419a-b665-d0f1a47ffbb5",
+        "chatSessionId": "sess_322cdd20-e957-42f0-98a7-d6b3718b479c",
+        "timestamp": 1794514586509
+      }
     ]
   }
 }
