@@ -16,5 +16,6 @@ public record SettingResponse(
         SettingValueType valueType,
         String description,
         UUID updatedBy,
+        Instant createdAt,
         Instant updatedAt
 ) {}

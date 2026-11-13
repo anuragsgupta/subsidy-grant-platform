@@ -158,6 +158,7 @@ public class SettingService {
                 setting.getValueType(),
                 setting.getDescription(),
                 setting.getUpdatedBy(),
+                setting.getCreatedAt(),
                 setting.getUpdatedAt()
         );
     }

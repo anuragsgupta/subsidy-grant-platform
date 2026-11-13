@@ -138,7 +138,7 @@ Implements the base module of GSDTS: authentication, user and region management,
   - AC: AC-AUTH-01.1, AC-AUTH-01.2, AC-AUTH-01.3, AC-AUTH-02.1, AC-AUTH-02.2, AC-AUTH-02.3, AC-AUTH-02.4, AC-AUTH-02.5, AC-AUTH-03.4
   - _Requires: 9_
 
-- [ ] 11. User module — services, controllers, and DTOs
+- [x] 11. User module — services, controllers, and DTOs
   - Create all DTO records in `user/api`: UserResponse, UserSummaryResponse, CreateUserRequest, UpdateUserRequest, UserStatusRequest, ChangeRoleRequest, ChangeRegionsRequest, RoleResponse, RegionResponse, CreateRegionRequest, UpdateRegionRequest, SettingResponse, UpdateSettingRequest
   - Create `UserQueryService` interface and impl: `AppUser getById(UUID)`, `boolean hasRole(UUID, String)`, `List<Long> getRegionIds(UUID)`
   - Create `RegionQueryService` interface and impl: `Region getById(Long)`, `boolean isDescendantOf(Long, Long)`, `List<Long> getDescendantIds(Long)`
