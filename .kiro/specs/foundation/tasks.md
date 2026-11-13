@@ -153,7 +153,7 @@ Implements the base module of GSDTS: authentication, user and region management,
   - AC: AC-USR-01.1, AC-USR-01.2, AC-USR-01.3, AC-USR-01.4, AC-USR-01.5, AC-USR-01.6, AC-USR-01.7, AC-USR-01.8, AC-USR-01.9, AC-USR-02.1, AC-USR-02.2, AC-USR-03.1, AC-USR-03.2, AC-USR-04.1, AC-USR-04.2, AC-USR-04.3
   - _Requires: 6, 7, 8, 9, 10_
 
-- [~] 12. Unit tests — AuthService, JwtService, UserService, RegionService, SettingsCacheService
+- [x] 12. Unit tests — AuthService, JwtService, UserService, RegionService, SettingsCacheService
   - Create `AuthServiceTest` (Mockito, no Spring context, no DB): mock AppUserRepository, UserRoleRepository, RoleRepository, PasswordEncoder, JwtService, AuditService, SettingsCacheService; write tests: `AC_AUTH_02_3_locksAccountAfterMaxFailedAttempts`, `AC_AUTH_02_3_returnsLockedWhileLockedUntilInFuture`, `AC_AUTH_02_3_doesNotExtendLockOnSubsequentAttempts`, `AC_AUTH_02_5_unlocksAndResetsCountWhenLockExpired`, `AC_AUTH_02_4_resetsFailedCountOnSuccessfulLogin`, `AC_AUTH_01_1_throwsDuplicateOnExistingUsername`, `AC_AUTH_01_1_throwsDuplicateOnExistingEmail`
   - Create `JwtServiceTest` (JUnit 5, real 256-bit test secret): `generatesTokenWithCorrectClaims_userId_role_expiry`, `validatesTokenSuccessfully`, `rejectsExpiredToken` (expirationMinutes=-1), `rejectsTamperedToken`, `extractsUserIdFromValidToken`
   - Create `UserServiceTest` (Mockito): `AC_USR_01_5_throwsWhenAdminDeactivatesThemself`, `AC_USR_01_7_throwsWhenRoleChangedWithActiveFieldPendingAssignments`, `AC_USR_01_8_throwsWhenRegionsChangedWithActiveFieldPendingAssignments`, `AC_USR_01_6_throwsResourceInUseWhenUserHasAuditReferences`, `AC_USR_01_2_throwsOnInvalidRegionBinding_fieldOfficerNoDistrict`, `AC_USR_01_2_throwsOnInvalidRegionBinding_districtOfficerMultipleDistricts`
