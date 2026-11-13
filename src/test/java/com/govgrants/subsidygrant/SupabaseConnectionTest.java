@@ -1,5 +1,6 @@
 package com.govgrants.subsidygrant;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -16,6 +17,7 @@ import java.sql.Statement;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
+@Disabled("Requires a live Supabase connection — only run manually with valid DB_URL credentials")
 class SupabaseConnectionTest {
 
     private static final Logger log = LoggerFactory.getLogger(SupabaseConnectionTest.class);
