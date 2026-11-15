@@ -5,7 +5,7 @@ backend/HELP.md
 !backend/**/src/main/**/target/
 !backend/**/src/test/**/target/
 backend/src/main/resources/application.yml
-
+backend/.env
 # ── Frontend (Vite / Node) ─────────────────────────────────────────────────────
 frontend/node_modules/
 frontend/dist/

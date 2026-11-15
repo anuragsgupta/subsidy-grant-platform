@@ -1,4 +1,4 @@
-package com.govgrants.subsidygrant.dto.request;
+package com.govgrants.subsidygrant.scheme.api;
 
 import com.govgrants.subsidygrant.enums.SchemeStatus;
 import jakarta.validation.constraints.*;
