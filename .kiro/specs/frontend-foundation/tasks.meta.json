@@ -1,0 +1,90 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1. Scaffold Vite + React + TypeScript project": [
+      {
+        "executionId": "6e358388-5186-43ba-96cc-d2d4f89429f5",
+        "chatSessionId": "sess_aa7c3128-1e54-4c16-b101-72422849d23a",
+        "timestamp": 1794819917836
+      },
+      {
+        "executionId": "6e358388-5186-43ba-96cc-d2d4f89429f5",
+        "chatSessionId": "sess_aa7c3128-1e54-4c16-b101-72422849d23a",
+        "timestamp": 1794819930636
+      },
+      {
+        "executionId": "6e358388-5186-43ba-96cc-d2d4f89429f5",
+        "chatSessionId": "sess_aa7c3128-1e54-4c16-b101-72422849d23a",
+        "timestamp": 1794821801737
+      }
+    ],
+    "2. Configure TypeScript, ESLint, and Vitest": [
+      {
+        "executionId": "6e358388-5186-43ba-96cc-d2d4f89429f5",
+        "chatSessionId": "sess_aa7c3128-1e54-4c16-b101-72422849d23a",
+        "timestamp": 1794819919389
+      },
+      {
+        "executionId": "6e358388-5186-43ba-96cc-d2d4f89429f5",
+        "chatSessionId": "sess_aa7c3128-1e54-4c16-b101-72422849d23a",
+        "timestamp": 1794821805367
+      },
+      {
+        "executionId": "6e358388-5186-43ba-96cc-d2d4f89429f5",
+        "chatSessionId": "sess_aa7c3128-1e54-4c16-b101-72422849d23a",
+        "timestamp": 1794822252632
+      }
+    ],
+    "3. Apply government design system (Tailwind + CSS tokens)": [
+      {
+        "executionId": "6e358388-5186-43ba-96cc-d2d4f89429f5",
+        "chatSessionId": "sess_aa7c3128-1e54-4c16-b101-72422849d23a",
+        "timestamp": 1794819919589
+      },
+      {
+        "executionId": "6e358388-5186-43ba-96cc-d2d4f89429f5",
+        "chatSessionId": "sess_aa7c3128-1e54-4c16-b101-72422849d23a",
+        "timestamp": 1794821808466
+      },
+      {
+        "executionId": "6e358388-5186-43ba-96cc-d2d4f89429f5",
+        "chatSessionId": "sess_aa7c3128-1e54-4c16-b101-72422849d23a",
+        "timestamp": 1794822256669
+      }
+    ],
+    "9. Checkpoint — verify layout renders": [
+      {
+        "executionId": "6e358388-5186-43ba-96cc-d2d4f89429f5",
+        "chatSessionId": "sess_aa7c3128-1e54-4c16-b101-72422849d23a",
+        "timestamp": 1794819919809
+      },
+      {
+        "executionId": "6e358388-5186-43ba-96cc-d2d4f89429f5",
+        "chatSessionId": "sess_aa7c3128-1e54-4c16-b101-72422849d23a",
+        "timestamp": 1794822269387
+      },
+      {
+        "executionId": "6e358388-5186-43ba-96cc-d2d4f89429f5",
+        "chatSessionId": "sess_aa7c3128-1e54-4c16-b101-72422849d23a",
+        "timestamp": 1794822582213
+      }
+    ],
+    "12. Final checkpoint — full build and quality verification": [
+      {
+        "executionId": "6e358388-5186-43ba-96cc-d2d4f89429f5",
+        "chatSessionId": "sess_aa7c3128-1e54-4c16-b101-72422849d23a",
+        "timestamp": 1794819919931
+      },
+      {
+        "executionId": "6e358388-5186-43ba-96cc-d2d4f89429f5",
+        "chatSessionId": "sess_aa7c3128-1e54-4c16-b101-72422849d23a",
+        "timestamp": 1794822891823
+      },
+      {
+        "executionId": "6e358388-5186-43ba-96cc-d2d4f89429f5",
+        "chatSessionId": "sess_aa7c3128-1e54-4c16-b101-72422849d23a",
+        "timestamp": 1794823594728
+      }
+    ]
+  }
+}
