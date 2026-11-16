@@ -1,11 +1,15 @@
 package com.govgrants.subsidygrant.entity;
 
 import com.govgrants.subsidygrant.auth.domain.AppUser;
+import com.govgrants.subsidygrant.eligibility.domain.Gender;
+import com.govgrants.subsidygrant.eligibility.domain.SocialCategory;
 import com.govgrants.subsidygrant.enums.BeneficiaryType;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -52,6 +56,26 @@ public class Beneficiary {
 
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
+
+    @Column(name = "date_of_birth")
+    private LocalDate dateOfBirth;
+
+    @Column(name = "annual_income", precision = 14, scale = 2)
+    private BigDecimal annualIncome;
+
+    @Column(name = "land_holding_acres", precision = 10, scale = 3)
+    private BigDecimal landHoldingAcres;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender", length = 10)
+    private Gender gender;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "social_category", length = 30)
+    private SocialCategory socialCategory;
+
+    @Column(name = "is_disabled")
+    private Boolean isDisabled;
 
     @PrePersist
     protected void onCreate() {

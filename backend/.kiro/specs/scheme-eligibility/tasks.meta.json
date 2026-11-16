@@ -1,0 +1,375 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1.1 Create `V202611070004__scheme_eligibility_schema.sql`": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826036861
+      },
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826049050
+      },
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826138218
+      }
+    ],
+    "2.1 Create eligibility domain enums": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826036988
+      },
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826146882
+      },
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826335519
+      }
+    ],
+    "2.2 Create eligibility value records": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826037078
+      },
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826340624
+      },
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794828217242
+      }
+    ],
+    "2.3 Migrate and extend `Scheme` entity": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826037186
+      },
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826347196
+      },
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794828223541
+      }
+    ],
+    "2.4 Create `SchemeCriterion`, `MilestoneTemplate`, `SchemeRegionBudget` JPA entities": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826037219
+      },
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794828234119
+      },
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794828338253
+      }
+    ],
+    "2.5 Create `EligibilityResult` JPA entity and extend `Beneficiary` entity": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826037250
+      },
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794828239377
+      },
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794828343942
+      }
+    ],
+    "3.1 Migrate `SchemeRepository` and create new scheme repositories": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826037282
+      },
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794828349527
+      },
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794828471890
+      }
+    ],
+    "3.2 Create `EligibilityResultRepository`": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826037310
+      },
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794828354812
+      },
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794828479025
+      }
+    ],
+    "4.1 Implement `EligibilityEvaluator`": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826037343
+      },
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794828484450
+      }
+    ],
+    "4.2 Implement `RiskTierPolicy`": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826037369
+      },
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794828490083
+      }
+    ],
+    "5.1 Implement `CriterionThresholdValidator`": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826037412
+      }
+    ],
+    "5.2 Implement `SchemeActivationGate`": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826037460
+      }
+    ],
+    "5.3 Create `SchemeFilter` record and `SchemeQueryService`": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826037494
+      }
+    ],
+    "5.4 Implement `SchemeRegionBudgetService`": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826037527
+      }
+    ],
+    "5.5 Extend `SchemeService` with criteria, milestone template, and status gate logic": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826037558
+      }
+    ],
+    "5.6 Implement `EligibilityPreviewService`": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826037619
+      }
+    ],
+    "6.1 Create criterion and milestone template DTOs": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826037703
+      }
+    ],
+    "6.2 Extend existing scheme request/response DTOs": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826037785
+      }
+    ],
+    "6.3 Create eligibility API DTOs": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826037844
+      }
+    ],
+    "6.4 Create MapStruct mappers": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826037920
+      }
+    ],
+    "6.5 Extend `SchemeController` with filter params and wire new DTOs": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826038019
+      }
+    ],
+    "6.6 Create `CriterionController`": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826038084
+      }
+    ],
+    "6.7 Create `MilestoneTemplateController`": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826038143
+      }
+    ],
+    "6.8 Create `BudgetController`": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826038178
+      }
+    ],
+    "6.9 Create `EligibilityController`": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826038218
+      }
+    ],
+    "7.1 Write property tests for `EligibilityEvaluator` (jqwik)": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826038250
+      }
+    ],
+    "7.2 Write property tests for `RiskTierPolicy` (jqwik)": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826038282
+      }
+    ],
+    "7.3 Write unit tests for `SchemeActivationGate`": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826038309
+      }
+    ],
+    "7.4 Write unit tests for `CriterionThresholdValidator`": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826038342
+      }
+    ],
+    "7.5 Write unit tests for `SchemeService` (Mockito)": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826038375
+      }
+    ],
+    "8.1 Write `SchemeControllerTest`": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826038404
+      }
+    ],
+    "8.2 Write `CriterionControllerTest`": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826038525
+      }
+    ],
+    "8.3 Write `BudgetControllerTest` and `EligibilityControllerTest`": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826038585
+      }
+    ],
+    "9.1 Write `SchemeMigrationIT`": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826038616
+      }
+    ],
+    "9.2 Write `EligibilityEvaluatorIntegrationIT`": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826038649
+      }
+    ],
+    "10.1 Verify cross-slice interface accessibility": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826038679
+      }
+    ],
+    "11. Final checkpoint — Ensure all tests pass": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826038708
+      }
+    ],
+    "1. Flyway migration — scheme_eligibility schema": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794826138249
+      }
+    ],
+    "2. Domain layer — enums and value records": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794828343978
+      }
+    ],
+    "3. Repository layer": [
+      {
+        "executionId": "2f202451-9510-4914-a321-c44b26fdfbc3",
+        "chatSessionId": "sess_a98e31c8-3c22-4115-81dc-25a707b052e2",
+        "timestamp": 1794828479094
+      }
+    ]
+  }
+}
