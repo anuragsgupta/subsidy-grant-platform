@@ -1,13 +1,3 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
-function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<h1>GSDTS — Coming Soon</h1>} />
-      </Routes>
-    </BrowserRouter>
-  )
-}
-
-export default App
+// This file is superseded by src/app/App.tsx.
+// Kept as a no-op to satisfy any tooling that references src/App.tsx.
+export {};
