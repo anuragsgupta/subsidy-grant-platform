@@ -1,0 +1,429 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1.1 Add jqwik to pom.xml": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794750725013
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794750767531
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794751073761
+      }
+    ],
+    "1.2 Relocate CreateSchemeRequest to scheme.api package": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794750726047
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794750772564
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794751081541
+      }
+    ],
+    "2.1 Create OpenApiConfig bean": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794750726132
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794751087572
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794751290935
+      }
+    ],
+    "3.1 Create Scheme request and response DTOs": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794750726201
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794751092755
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794751307169
+      }
+    ],
+    "3.2 Create SchemeMapper": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794750726310
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794751098557
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794751319692
+      }
+    ],
+    "4.1 Create SchemeService": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794750726358
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794751325372
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794751993878
+      }
+    ],
+    "5.1 Create SchemeController": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794750726417
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794752054374
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794752494274
+      }
+    ],
+    "6. Checkpoint — Scheme domain complete": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794750726464
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794752805360
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794752974165
+      }
+    ],
+    "7.1 Create Beneficiary request and response DTOs": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794750726510
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794751336513
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794752001456
+      }
+    ],
+    "7.2 Create BeneficiaryMapper": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794750726557
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794751344417
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794752013469
+      }
+    ],
+    "8.1 Create BeneficiaryService": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794750726603
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794752094979
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794752502467
+      }
+    ],
+    "9.1 Create BeneficiaryController": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794750726654
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794752539006
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794752771611
+      }
+    ],
+    "10. Checkpoint — Beneficiary domain complete": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794750726723
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794753009690
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794753143490
+      }
+    ],
+    "11.1 Create Application request and response DTOs": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794750726773
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794751354268
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794752030323
+      }
+    ],
+    "11.2 Create ApplicationMapper": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794750726817
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794751360707
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794752039953
+      }
+    ],
+    "12.1 Create ApplicationStatusTransitionValidator": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794750726866
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794751371444
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794752046988
+      }
+    ],
+    "13.1 Create ApplicationService": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794750726911
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794752106345
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794752510195
+      }
+    ],
+    "14.1 Create ApplicationController": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794750726959
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794752545735
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794752783098
+      }
+    ],
+    "15. Checkpoint — Application domain complete": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794750727034
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794753158316
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794753383169
+      }
+    ],
+    "18. Final checkpoint — full test suite": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794750727079
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794753408734
+      },
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794753616992
+      }
+    ],
+    "1. Project setup: add jqwik dependency and relocate CreateSchemeRequest": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794751081608
+      }
+    ],
+    "2. OpenAPI configuration": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794751290982
+      }
+    ],
+    "3. Scheme domain — DTOs and mapper": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794751319748
+      }
+    ],
+    "4. Scheme domain — service": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794751993957
+      }
+    ],
+    "7. Beneficiary domain — DTOs and mapper": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794752013543
+      }
+    ],
+    "11. Application domain — DTOs and mapper": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794752040031
+      }
+    ],
+    "12. Application domain — status transition validator": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794752047046
+      }
+    ],
+    "5. Scheme domain — controller": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794752494324
+      }
+    ],
+    "8. Beneficiary domain — service": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794752502510
+      }
+    ],
+    "13. Application domain — service": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794752510256
+      }
+    ],
+    "9. Beneficiary domain — controller": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794752771682
+      }
+    ],
+    "14. Application domain — controller": [
+      {
+        "executionId": "e0568a3a-5601-4535-80c5-4e57a2295859",
+        "chatSessionId": "sess_c624ad28-4451-4f83-9482-1032527fc4a3",
+        "timestamp": 1794752783162
+      }
+    ]
+  }
+}

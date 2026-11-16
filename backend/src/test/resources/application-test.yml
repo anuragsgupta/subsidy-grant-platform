@@ -1,0 +1,20 @@
+spring:
+  flyway:
+    out-of-order: true             # Testcontainers may apply migrations in any order during test runs
+    baseline-on-migrate: false     # Fresh DB in Testcontainers; no baseline needed
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+app:
+  jwt:
+    secret: test-secret-key-that-is-at-least-32-characters-long-for-hs256
+    expiration-minutes: 60
+
+  security:
+    pii-encryption-key: test-pii-encryption-key-32-bytes!!
+    national-id-hash-key: test-national-id-hash-key-32bytes
+
+  cors:
+    allowed-origins: http://localhost:3000
