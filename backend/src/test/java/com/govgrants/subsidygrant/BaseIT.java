@@ -26,6 +26,7 @@ public abstract class BaseIT {
     @Container
     static final PostgreSQLContainer<?> POSTGRES =
             new PostgreSQLContainer<>("postgres:15")
+                    .withInitScript("init-db.sql")
                     .withDatabaseName("testdb")
                     .withUsername("postgres")
                     .withPassword("postgres");

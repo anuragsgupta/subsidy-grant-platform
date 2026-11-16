@@ -11,7 +11,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.util.UUID;
 
-@Entity
+@Entity(name = "SchemeV2")
 @Table(name = "scheme", schema = "public")
 @Getter
 @Setter

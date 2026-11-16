@@ -12,14 +12,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Repository
+@Repository("schemeRepositoryNew")
 public interface SchemeRepository extends JpaRepository<Scheme, UUID>, JpaSpecificationExecutor<Scheme> {
 
     Optional<Scheme> findByCode(String code);
 
     boolean existsByCode(String code);
 
-    @Query("SELECT s FROM Scheme s WHERE s.status = com.govgrants.subsidygrant.enums.SchemeStatus.OPEN " +
+    @Query("SELECT s FROM SchemeV2 s WHERE s.status = com.govgrants.subsidygrant.enums.SchemeStatus.OPEN " +
            "AND s.startDate <= :today AND s.endDate >= :today")
     List<Scheme> findAllOpenAndInWindow(@Param("today") LocalDate today);
 }
