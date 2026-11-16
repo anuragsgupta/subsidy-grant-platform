@@ -1,0 +1,9 @@
+{
+  "spec": {
+    "id": "frontend-auth",
+    "title": "Frontend — Phase 2: Authentication & Session Management",
+    "phase": 2,
+    "dependsOn": ["frontend-foundation"],
+    "status": "ready"
+  }
+}

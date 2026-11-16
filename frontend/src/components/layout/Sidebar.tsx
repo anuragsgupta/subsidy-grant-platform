@@ -15,6 +15,7 @@ import {
   FileSearch,
   ChevronLeft,
   ChevronRight,
+  UserRound,
 } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { Badge } from '../ui/badge';
@@ -25,31 +26,49 @@ import {
   TooltipTrigger,
 } from '../ui/tooltip';
 import { cn } from '../../lib/utils';
+import { useAuth } from '../../contexts/AuthContext';
+import type { UserRole } from '../../types/auth';
 
 interface NavItem {
   label: string;
   href: string;
   icon: LucideIcon;
+  roles: UserRole[];
   comingSoon?: boolean;
 }
 
+// All nav items, each tagged with the roles that may see it.
 const NAV_ITEMS: NavItem[] = [
-  { label: 'Dashboard',     href: '/dashboard',           icon: LayoutDashboard },
-  { label: 'Schemes',       href: '/schemes',             icon: FileText },
-  { label: 'Beneficiaries', href: '/admin/beneficiaries', icon: Users },
-  { label: 'Applications',  href: '/applications',        icon: ClipboardList },
-  { label: 'Verification',  href: '/verification',        icon: CheckSquare,  comingSoon: true },
-  { label: 'Disbursement',  href: '/disbursement',        icon: Banknote,     comingSoon: true },
-  { label: 'Compliance',    href: '/compliance',          icon: ShieldCheck,  comingSoon: true },
-  { label: 'Analytics',     href: '/analytics',           icon: BarChart2,    comingSoon: true },
+  // --- Shared ---
+  {
+    label: 'Dashboard',
+    href: '/dashboard',
+    icon: LayoutDashboard,
+    roles: ['ADMIN', 'BENEFICIARY', 'FIELD_OFFICER', 'DISTRICT_OFFICER', 'FINANCE_APPROVER'],
+  },
+  { label: 'Schemes', href: '/schemes', icon: FileText, roles: ['ADMIN', 'BENEFICIARY'] },
+  { label: 'Beneficiaries', href: '/admin/beneficiaries', icon: Users, roles: ['ADMIN'] },
+  { label: 'Applications', href: '/applications', icon: ClipboardList, roles: ['ADMIN', 'BENEFICIARY'] },
+  { label: 'Verification Tasks', href: '/verification', icon: CheckSquare, roles: ['ADMIN', 'FIELD_OFFICER'], comingSoon: true },
+  { label: 'Application Queue', href: '/district/queue', icon: ClipboardList, roles: ['ADMIN', 'DISTRICT_OFFICER'], comingSoon: true },
+  { label: 'Finance Queue', href: '/finance/queue', icon: Banknote, roles: ['ADMIN', 'FINANCE_APPROVER'], comingSoon: true },
+  { label: 'Disbursement', href: '/disbursement', icon: Banknote, roles: ['ADMIN'], comingSoon: true },
+  { label: 'Compliance', href: '/compliance', icon: ShieldCheck, roles: ['ADMIN'], comingSoon: true },
+  { label: 'Analytics', href: '/analytics', icon: BarChart2, roles: ['ADMIN'], comingSoon: true },
+  { label: 'My Profile', href: '/profile', icon: UserRound, roles: ['ADMIN', 'BENEFICIARY', 'FIELD_OFFICER', 'DISTRICT_OFFICER', 'FINANCE_APPROVER'] },
 ];
 
 const ADMIN_ITEMS: NavItem[] = [
-  { label: 'Users',      href: '/admin/users',    icon: UserCog },
-  { label: 'Regions',    href: '/admin/regions',  icon: Map },
-  { label: 'Settings',   href: '/admin/settings', icon: Settings },
-  { label: 'Audit Logs', href: '/admin/audit',    icon: FileSearch },
+  { label: 'Users', href: '/admin/users', icon: UserCog, roles: ['ADMIN'] },
+  { label: 'Regions', href: '/admin/regions', icon: Map, roles: ['ADMIN'] },
+  { label: 'Settings', href: '/admin/settings', icon: Settings, roles: ['ADMIN'] },
+  { label: 'Audit Logs', href: '/admin/audit', icon: FileSearch, roles: ['ADMIN'] },
 ];
+
+function filterByRole(items: NavItem[], role: UserRole | null): NavItem[] {
+  if (!role) return [];
+  return items.filter((item) => item.roles.includes(role));
+}
 
 function isActive(pathname: string, href: string): boolean {
   return pathname === href || pathname.startsWith(href + '/');
@@ -107,9 +126,13 @@ function SidebarLink({ item, collapsed }: SidebarLinkProps) {
 }
 
 export function Sidebar() {
+  const { user } = useAuth();
   const [collapsed, setCollapsed] = useState<boolean>(
     () => localStorage.getItem('gsdts_sidebar_collapsed') === 'true'
   );
+
+  const mainItems = filterByRole(NAV_ITEMS, user?.role ?? null);
+  const adminItems = filterByRole(ADMIN_ITEMS, user?.role ?? null);
 
   function toggleCollapsed() {
     const next = !collapsed;
@@ -145,22 +168,24 @@ export function Sidebar() {
 
         {/* Navigation */}
         <nav className="flex-1 overflow-y-auto overflow-x-hidden py-3 px-2 flex flex-col gap-1">
-          {NAV_ITEMS.map((item) => (
+          {mainItems.map((item) => (
             <SidebarLink key={item.href} item={item} collapsed={collapsed} />
           ))}
 
-          {/* Admin section divider */}
-          <div className="my-2 border-t border-gov-border/40" />
-
-          {!collapsed && (
-            <p className="px-3 pb-1 text-[10px] font-semibold uppercase tracking-wider text-text-secondary/60">
-              Administration
-            </p>
+          {/* Admin section divider — only if admin items exist */}
+          {adminItems.length > 0 && (
+            <>
+              <div className="my-2 border-t border-gov-border/40" />
+              {!collapsed && (
+                <p className="px-3 pb-1 text-[10px] font-semibold uppercase tracking-wider text-text-secondary/60">
+                  Administration
+                </p>
+              )}
+              {adminItems.map((item) => (
+                <SidebarLink key={item.href} item={item} collapsed={collapsed} />
+              ))}
+            </>
           )}
-
-          {ADMIN_ITEMS.map((item) => (
-            <SidebarLink key={item.href} item={item} collapsed={collapsed} />
-          ))}
         </nav>
 
         {/* Collapse toggle */}
