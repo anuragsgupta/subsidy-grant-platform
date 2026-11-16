@@ -5,6 +5,7 @@ backend/HELP.md
 !backend/**/src/main/**/target/
 !backend/**/src/test/**/target/
 backend/src/main/resources/application.yml
+backend/src/main/resources/application-local.yml
 backend/.env
 # ── Frontend (Vite / Node) ─────────────────────────────────────────────────────
 frontend/node_modules/
@@ -25,5 +26,4 @@ frontend/.env.*.local
 Thumbs.db
 
 # ── Secrets ───────────────────────────────────────────────────────────────────
-# .env.example files are intentionally committed
-backend/.env
+# .env.example files are intentionally committed; .env files are not.
