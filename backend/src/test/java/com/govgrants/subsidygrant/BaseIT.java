@@ -1,7 +1,5 @@
 package com.govgrants.subsidygrant;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.resttestclient.TestRestTemplate;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -47,8 +45,4 @@ public abstract class BaseIT {
                 () -> "test-secret-key-for-integration-tests-must-be-at-least-32-bytes");
         registry.add("app.jwt.expiration-minutes", () -> "30");
     }
-
-    /** Available for sub-classes that need to make HTTP calls directly. */
-    @Autowired
-    protected TestRestTemplate restTemplate;
 }

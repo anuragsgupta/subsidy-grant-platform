@@ -146,6 +146,7 @@ public class AuthService {
      * @param request validated login payload
      * @return token response with the signed JWT and expiry
      */
+    @Transactional(noRollbackFor = {UnauthenticatedException.class, TooManyAttemptsException.class})
     public TokenResponse login(LoginRequest request) {
         // AC-AUTH-02.2 — find user case-insensitive
         AppUser user = userRepository.findByUsernameIgnoreCase(request.username())

@@ -17,8 +17,10 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.time.Instant;
+import java.sql.Timestamp;
 import java.util.Base64;
 import java.util.Map;
+import com.govgrants.subsidygrant.user.service.SettingsCacheService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -71,6 +73,9 @@ class AuthControllerTest {
 
     @Autowired
     private JdbcTemplate jdbc;
+
+    @Autowired
+    private SettingsCacheService settingsCache;
 
     // ── helpers ──────────────────────────────────────────────────────────────
 
@@ -127,6 +132,7 @@ class AuthControllerTest {
                 """);
         // Also reset any modified system settings to avoid cross-test pollution
         jdbc.update("UPDATE system_setting SET value = '5' WHERE key = 'auth.maxFailedLogins'");
+        settingsCache.evict("auth.maxFailedLogins");
     }
 
     // ══════════════════════════════════════════════════════════════════════════
@@ -299,6 +305,8 @@ class AuthControllerTest {
 
         // Reduce threshold to 3 for this test
         jdbc.update("UPDATE system_setting SET value = '3' WHERE key = 'auth.maxFailedLogins'");
+        settingsCache.evict("auth.maxFailedLogins");
+        assertThat(settingsCache.getInt("auth.maxFailedLogins")).isEqualTo(3);
 
         // Attempts 1 & 2 — 401 each
         for (int i = 0; i < 2; i++) {
@@ -326,8 +334,8 @@ class AuthControllerTest {
 
         // Simulate expired lock by setting locked_until to 1 minute ago
         jdbc.update(
-                "UPDATE app_user SET locked_until = ? WHERE username = 'user_unlock01'",
-                Instant.now().minusSeconds(60));
+                "UPDATE app_user SET locked_until = ?::timestamptz WHERE username = 'user_unlock01'",
+                Timestamp.from(Instant.now().minusSeconds(60)));
 
         // Login should succeed because the lock has expired
         mockMvc.perform(post(BASE_URL + "/login")
@@ -384,7 +392,9 @@ class AuthControllerTest {
                                   "password": "Password1",
                                   "fullName": "Staff User",
                                   "email": "newstaff@example.com",
-                                  "role": "FIELD_OFFICER"
+                                  "role": "FIELD_OFFICER",
+                                  "roleId": 2,
+                                  "regionIds": []
                                 }
                                 """))
                 .andExpect(status().isForbidden())

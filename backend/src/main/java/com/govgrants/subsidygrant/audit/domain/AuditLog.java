@@ -2,6 +2,7 @@ package com.govgrants.subsidygrant.audit.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnTransformer;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
@@ -60,9 +61,11 @@ public class AuditLog {
 
     /** JSONB column — serialized by {@code AuditService} from a {@code Map}. */
     @Column(name = "old_value", columnDefinition = "jsonb", updatable = false)
+    @ColumnTransformer(write = "?::jsonb")
     private String oldValue;
 
     @Column(name = "new_value", columnDefinition = "jsonb", updatable = false)
+    @ColumnTransformer(write = "?::jsonb")
     private String newValue;
 
     @Column(name = "remark", columnDefinition = "TEXT", updatable = false)

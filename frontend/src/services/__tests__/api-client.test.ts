@@ -1,3 +1,4 @@
+// @vitest-environment jsdom
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import MockAdapter from 'axios-mock-adapter';
 import { apiClient, TOKEN_KEY, EXPIRES_KEY, saveTokens, clearTokens, getAccessToken, isTokenExpired, _resetRedirectingForTest } from '../api-client';

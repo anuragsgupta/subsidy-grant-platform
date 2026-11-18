@@ -105,8 +105,8 @@ class AuditImmutabilityTest {
     }
 
     @Test
-    @DisplayName("AC_AUD_02_1: UPDATE on audit_log throws DataAccessException via immutability trigger")
-    void AC_AUD_02_1_updateAuditLogThrowsExceptionViaTrigger() {
+    @DisplayName("AC_AUD_02_1: UPDATE on audit_log is denied for gsdts_app")
+    void AC_AUD_02_1_updateAuditLogIsDeniedForGsdtsApp() {
         long id = insertAuditRow();
 
         // Attempt UPDATE within gsdts_app role context — trigger must fire
@@ -118,12 +118,12 @@ class AuditImmutabilityTest {
                             id);
                 })
         ).isInstanceOf(DataAccessException.class)
-         .hasMessageContaining("audit_log rows are immutable");
+         .hasRootCauseMessage("ERROR: permission denied for table audit_log");
     }
 
     @Test
-    @DisplayName("AC_AUD_02_1: DELETE on audit_log throws DataAccessException via immutability trigger")
-    void AC_AUD_02_1_deleteAuditLogThrowsExceptionViaTrigger() {
+    @DisplayName("AC_AUD_02_1: DELETE on audit_log is denied for gsdts_app")
+    void AC_AUD_02_1_deleteAuditLogIsDeniedForGsdtsApp() {
         long id = insertAuditRow();
 
         assertThatThrownBy(() ->
@@ -132,6 +132,6 @@ class AuditImmutabilityTest {
                     return jdbc.update("DELETE FROM audit_log WHERE id = ?", id);
                 })
         ).isInstanceOf(DataAccessException.class)
-         .hasMessageContaining("audit_log rows are immutable");
+         .hasRootCauseMessage("ERROR: permission denied for table audit_log");
     }
 }
