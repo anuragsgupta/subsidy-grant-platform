@@ -1,0 +1,16 @@
+import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { Button } from '../../../components/ui/button';
+import { QueryState } from '../../../components/states/QueryState';
+import { applicationService } from '../services/application.service';
+import { currentLevel } from '../services/workflow-adapter';
+import type { ApplicationStatus } from '../types/application.types';
+
+export default function VerificationQueuePage() {
+  const [status, setStatus] = useState('ALL');
+  const [level, setLevel] = useState('ALL');
+  const query = useQuery({ queryKey: ['applications', 'verification-queue'], queryFn: () => applicationService.list() });
+  const records = useMemo(() => (query.data?.content ?? []).filter((item) => item.status !== 'DRAFT' && item.status !== 'COMPLETED' && item.status !== 'REJECTED' && item.status !== 'AUTO_REJECTED' && item.status !== 'DISBURSEMENT_IN_PROGRESS').filter((item) => status === 'ALL' || item.status === status).filter((item) => level === 'ALL' || currentLevel(item.status) === level), [query.data, status, level]);
+  return <main className="mx-auto w-full max-w-6xl space-y-6 p-6"><header><p className="text-sm font-semibold uppercase tracking-wide text-blue-700">Review operations</p><h1 className="mt-1 text-3xl font-semibold">Verification queue</h1><p className="mt-2 text-sm text-slate-600">Filter active applications by workflow status and inferred review level.</p></header><div className="flex flex-wrap gap-3"><label className="text-sm">Status<select aria-label="Filter by status" className="ml-2 h-9 rounded-md border bg-white px-3" value={status} onChange={(event) => setStatus(event.target.value)}><option value="ALL">All active</option>{(['SUBMITTED', 'UNDER_REVIEW', 'CLARIFICATION_REQUIRED', 'FIELD_VERIFIED', 'DISTRICT_APPROVED'] as ApplicationStatus[]).map((value) => <option key={value} value={value}>{value.replace(/_/g, ' ')}</option>)}</select></label><label className="text-sm">Level<select aria-label="Filter by level" className="ml-2 h-9 rounded-md border bg-white px-3" value={level} onChange={(event) => setLevel(event.target.value)}><option value="ALL">All levels</option><option value="FIELD">Field</option><option value="DISTRICT">District</option><option value="FINANCE">Finance</option></select></label></div><QueryState isLoading={query.isLoading} isError={query.isError} error={query.error} isEmpty={!records.length} onRetry={() => void query.refetch()} emptyMessage="No applications match this verification queue filter."><div className="grid gap-4">{records.map((item) => <article key={item.id} className="flex flex-wrap items-center justify-between gap-4 rounded-xl border bg-white p-5 shadow-sm"><div><p className="text-xs font-semibold tracking-wider text-slate-500">{item.referenceNo}</p><h2 className="mt-1 font-semibold">{item.beneficiaryFullName} · {item.schemeCode}</h2><p className="mt-1 text-sm text-slate-600">₹{item.requestedAmount.toLocaleString()} · {item.status.replace(/_/g, ' ')} · {currentLevel(item.status)} level</p></div><Button asChild variant="outline"><Link to={`/verification/${item.id}`}>Review application</Link></Button></article>)}</div></QueryState></main>;
+}

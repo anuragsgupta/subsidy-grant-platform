@@ -1,5 +1,14 @@
-import { PlaceholderPage } from '../../placeholders/PlaceholderPage';
+import { Link, useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { Button } from '../../../components/ui/button';
+import { QueryState } from '../../../components/states/QueryState';
+import { schemeService } from '../services/scheme.service';
 
 export default function SchemeDetailPage() {
-  return <PlaceholderPage title="Scheme Details" description="Scheme detail view coming in Phase 3." />;
+  const { id = '' } = useParams();
+  const query = useQuery({ queryKey: ['schemes', id], queryFn: () => schemeService.get(id), enabled: Boolean(id) });
+  const scheme = query.data;
+  return <main className="mx-auto w-full max-w-5xl space-y-6 p-6"><Link className="text-sm text-blue-700 hover:underline" to="/schemes">← Schemes</Link><QueryState isLoading={query.isLoading} isError={query.isError} error={query.error} isEmpty={!scheme} onRetry={() => void query.refetch()} emptyMessage="Scheme not found.">
+    {scheme && <><header className="flex flex-wrap items-start justify-between gap-4"><div><p className="text-sm font-semibold uppercase tracking-wide text-blue-700">{scheme.code}</p><h1 className="mt-1 text-3xl font-semibold">{scheme.name}</h1><p className="mt-2 max-w-2xl text-slate-600">{scheme.description || 'No description provided.'}</p></div><span className="rounded-full bg-slate-100 px-3 py-1.5 text-sm font-semibold">{scheme.status}</span></header><section className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{[['Minimum grant', `₹${scheme.minGrantAmount.toLocaleString()}`], ['Maximum grant', `₹${scheme.maxGrantAmount.toLocaleString()}`], ['Starts', scheme.startDate], ['Ends', scheme.endDate]].map(([label, value]) => <div key={label} className="rounded-xl border bg-white p-4"><p className="text-sm text-slate-500">{label}</p><p className="mt-1 font-semibold">{value}</p></div>)}</section><section className="rounded-xl border bg-white p-6"><h2 className="text-lg font-semibold">Eligibility rules</h2>{scheme.criteria?.length ? <ul className="mt-4 divide-y">{scheme.criteria.map((rule) => <li key={rule.id} className="py-3 text-sm"><span className="font-medium">{rule.description || rule.attribute || 'Criterion'}</span>{rule.threshold && <span className="text-slate-600"> · {rule.operator} {rule.threshold}</span>}{rule.mandatory && <span className="ml-2 rounded bg-amber-100 px-2 py-0.5 text-xs text-amber-800">Mandatory</span>}</li>)}</ul> : <p className="mt-3 text-sm text-slate-600">Eligibility criteria are not included in this API response.</p>}</section><section className="rounded-xl border bg-white p-6"><h2 className="text-lg font-semibold">Grant limits and disbursement</h2><p className="mt-2 text-sm text-slate-600">Grant range: ₹{scheme.minGrantAmount.toLocaleString()}–₹{scheme.maxGrantAmount.toLocaleString()}.</p>{scheme.milestoneTemplates?.length ? <ol className="mt-3 list-inside list-decimal space-y-2 text-sm">{scheme.milestoneTemplates.map((item) => <li key={item.id}>{item.name} — {item.tranchePercentage}% ({item.dueDays} days)</li>)}</ol> : <p className="mt-2 text-sm text-slate-600">No tranche templates were returned.</p>}</section><Button asChild disabled={scheme.status !== 'OPEN'}><Link to={`/applications/new?schemeId=${scheme.id}`}>Start application</Link></Button></>}
+  </QueryState></main>;
 }

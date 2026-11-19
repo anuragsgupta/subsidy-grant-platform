@@ -1,5 +1,11 @@
-import { PlaceholderPage } from '../../placeholders/PlaceholderPage';
+import { Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { Button } from '../../../components/ui/button';
+import { QueryState } from '../../../components/states/QueryState';
+import { applicationService } from '../services/application.service';
 
 export default function ApplicationListPage() {
-  return <PlaceholderPage title="Applications" description="Application management coming in Phase 3." />;
+  const query = useQuery({ queryKey: ['applications'], queryFn: () => applicationService.list() });
+  const rows = query.data?.content ?? [];
+  return <main className="mx-auto w-full max-w-6xl space-y-6 p-6"><header className="flex flex-wrap items-end justify-between gap-4"><div><p className="text-sm font-semibold uppercase tracking-wide text-blue-700">Grant pipeline</p><h1 className="mt-1 text-3xl font-semibold">Applications</h1><p className="mt-2 text-sm text-slate-600">Track requests from submission through review.</p></div><Button asChild><Link to="/applications/new">New application</Link></Button></header><QueryState isLoading={query.isLoading} isError={query.isError} error={query.error} isEmpty={!rows.length} onRetry={() => void query.refetch()} emptyMessage="No applications have been submitted."><div className="overflow-hidden rounded-xl border bg-white shadow-sm"><div className="overflow-x-auto"><table className="w-full text-left text-sm"><thead className="bg-slate-50 text-slate-600"><tr><th className="p-4">Reference</th><th className="p-4">Beneficiary</th><th className="p-4">Scheme</th><th className="p-4">Requested</th><th className="p-4">Status</th><th className="p-4"> </th></tr></thead><tbody className="divide-y">{rows.map((application) => <tr key={application.id}><td className="p-4 font-medium">{application.referenceNo}</td><td className="p-4">{application.beneficiaryFullName}</td><td className="p-4">{application.schemeCode}</td><td className="p-4">₹{application.requestedAmount.toLocaleString()}</td><td className="p-4"><span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold">{application.status.replace(/_/g, ' ')}</span></td><td className="p-4 text-right"><Button asChild size="sm" variant="outline"><Link to={`/applications/${application.id}`}>Details</Link></Button></td></tr>)}</tbody></table></div></div></QueryState></main>;
 }

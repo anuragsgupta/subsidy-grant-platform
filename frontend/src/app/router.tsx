@@ -56,6 +56,7 @@ export const router = createBrowserRouter([
 
           // Admin-only
           { path: 'admin/beneficiaries', element: lazyPage(() => import('../features/beneficiaries/pages/BeneficiaryListPage')) },
+          { path: 'admin/beneficiaries/new', element: lazyPage(() => import('../features/beneficiaries/pages/CreateBeneficiaryPage')) },
           { path: 'admin/beneficiaries/:id', element: lazyPage(() => import('../features/beneficiaries/pages/BeneficiaryDetailPage')) },
           { path: 'admin/users', element: lazyPage(() => import('../features/users/pages/UserListPage')) },
           { path: 'admin/users/new', element: lazyPage(() => import('../features/users/pages/CreateUserPage')) },
@@ -72,7 +73,9 @@ export const router = createBrowserRouter([
           { path: 'finance/dashboard', element: lazyPage(() => import('../features/dashboard/pages/DashboardPage')) },
 
           // Placeholder sections
-          { path: 'verification', element: <PlaceholderPage title="Verification" description="This feature is coming soon." /> },
+          { path: 'verification', element: lazyPage(() => import('../features/applications/pages/VerificationQueuePage')) },
+          { path: 'verification/:id', element: lazyPage(() => import('../features/applications/pages/VerificationDetailPage')) },
+          { path: 'milestone-2', element: lazyPage(() => import('../features/applications/pages/Milestone2ShowcasePage')) },
           { path: 'disbursement', element: <PlaceholderPage title="Disbursement" description="This feature is coming soon." /> },
           { path: 'compliance', element: <PlaceholderPage title="Compliance" description="This feature is coming soon." /> },
           { path: 'analytics', element: <PlaceholderPage title="Analytics" description="This feature is coming soon." /> },
