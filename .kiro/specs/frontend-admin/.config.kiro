@@ -1,0 +1,9 @@
+{
+  "spec": {
+    "id": "frontend-admin",
+    "title": "Frontend — Phase 3: Admin Backend Integration (Users, Roles, Regions, Settings, Audit)",
+    "phase": 3,
+    "dependsOn": ["frontend-foundation", "frontend-auth"],
+    "status": "ready"
+  }
+}
