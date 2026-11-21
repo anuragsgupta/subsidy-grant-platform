@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+﻿import { useNavigate } from 'react-router-dom';
 import { Badge } from '../../../components/ui/badge';
 import type { UserSummaryResponse } from '../types/user.types';
 
@@ -9,7 +9,7 @@ interface UserTableProps {
   users: UserSummaryResponse[];
 }
 
-/** User list table — clicking a row opens the user detail page. */
+/** User list table â€” clicking a row opens the user detail page. */
 export function UserTable({ users }: UserTableProps) {
   const navigate = useNavigate();
 
@@ -34,7 +34,7 @@ export function UserTable({ users }: UserTableProps) {
             <td className={`${td} font-medium text-text-primary`}>{u.fullName}</td>
             <td className={td}>{u.username}</td>
             <td className={td}>{u.email}</td>
-            <td className={td}>{u.role ?? '—'}</td>
+            <td className={td}>{u.role ?? 'â€”'}</td>
             <td className={td}>
               {u.active ? (
                 <Badge

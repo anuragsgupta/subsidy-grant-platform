@@ -1,4 +1,4 @@
-import { formatDate } from '../../../lib/utils';
+﻿import { formatDate } from '../../../lib/utils';
 import type { AuditLogResponse } from '../types/audit.types';
 
 const th = 'py-2 px-3 text-left font-medium text-text-secondary border-b border-gov-border';
@@ -32,9 +32,9 @@ export function AuditTable({ logs, onRowClick }: AuditTableProps) {
           >
             <td className={td}>{formatDate(log.occurredAt, 'dd MMM yyyy HH:mm')}</td>
             <td className={td}>
-              <span className="text-text-primary">{log.actorRole ?? '—'}</span>
+              <span className="text-text-primary">{log.actorRole ?? 'â€”'}</span>
               <span className="block text-xs text-text-secondary">
-                {log.actorId ?? '—'}
+                {log.actorId ?? 'â€”'}
               </span>
             </td>
             <td className={td}>{log.actorType}</td>
@@ -43,7 +43,7 @@ export function AuditTable({ logs, onRowClick }: AuditTableProps) {
               {log.entityType}{' '}
               <span className="text-text-secondary">#{log.entityId}</span>
             </td>
-            <td className={td}>{log.referenceNo ?? '—'}</td>
+            <td className={td}>{log.referenceNo ?? 'â€”'}</td>
           </tr>
         ))}
       </tbody>
