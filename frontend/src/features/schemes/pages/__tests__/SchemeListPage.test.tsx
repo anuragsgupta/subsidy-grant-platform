@@ -1,8 +1,7 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+﻿import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { MemoryRouter } from 'react-router-dom';
-import React from 'react';
 
 vi.mock('../../../../contexts/AuthContext', () => ({
   useAuth: vi.fn(),
@@ -98,7 +97,7 @@ describe('SchemeListPage', () => {
 
     // Directly fire a pointer down on the select trigger which opens the radix portal
     // Then click the Open option via keyboard simulation
-    // Fallback: mock the state via URL search param — test the data-layer instead:
+    // Fallback: mock the state via URL search param â€” test the data-layer instead:
     // Both schemes visible now
     expect(screen.getAllByText('Agricultural Fund').length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText('Rural Housing Scheme').length).toBeGreaterThanOrEqual(1);

@@ -1,9 +1,7 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+﻿import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { MemoryRouter } from 'react-router-dom';
-import React from 'react';
 
 vi.mock('../../../../contexts/AuthContext', () => ({
   useAuth: vi.fn(),
@@ -12,11 +10,6 @@ vi.mock('../../../../contexts/AuthContext', () => ({
 vi.mock('../../../../features/applications/services/application.service', () => ({
   applicationService: { getAll: vi.fn(), getById: vi.fn(), add: vi.fn() },
   getApplicationsForRole: vi.fn((apps: unknown[]) => apps),
-}));
-
-vi.mock('../../../../features/applications/hooks/useApplications', () => ({
-  useApplicationsQuery: vi.fn(),
-  useApplicationQuery: vi.fn(),
 }));
 
 vi.mock('../../../../services/demo-data.service', () => ({
@@ -35,7 +28,7 @@ vi.mock('../../../../services/demo-data.service', () => ({
 }));
 
 import { useAuth } from '../../../../contexts/AuthContext';
-import { useApplicationsQuery } from '../../../../features/applications/hooks/useApplications';
+import { applicationService } from '../../services/application.service';
 import ApplicationListPage from '../ApplicationListPage';
 
 const baseUser = {
@@ -53,7 +46,7 @@ function mockRole(role: string) {
 }
 
 function renderPage() {
-  const qc = new QueryClient({ defaultOptions: { queries: { retry: false } } });
+  const qc = new QueryClient({ defaultOptions: { queries: { retry: false, staleTime: 0, gcTime: 0 } } });
   return render(
     <QueryClientProvider client={qc}>
       <MemoryRouter><ApplicationListPage /></MemoryRouter>
@@ -67,11 +60,11 @@ const app2 = { id: 'app-002', referenceNumber: 'APP-20250116-000002', beneficiar
 describe('ApplicationListPage', () => {
   beforeEach(() => vi.clearAllMocks());
 
-  it('ADMIN + loading shows animate-pulse', () => {
+  it('ADMIN + loading shows loading skeleton', () => {
     mockRole('ADMIN');
     vi.mocked(applicationService.getAll).mockReturnValue(new Promise(() => {}));
     const { container } = renderPage();
-    expect(container.querySelector('.animate-pulse')).not.toBeNull();
+    expect(container.querySelector('[aria-busy="true"]')).not.toBeNull();
   });
 
   it('ADMIN + empty shows empty state text', async () => {
@@ -83,7 +76,7 @@ describe('ApplicationListPage', () => {
 
   it('ADMIN + 2 apps shows both reference numbers', async () => {
     mockRole('ADMIN');
-    vi.mocked(applicationService.getAll).mockResolvedValue([app1, app2]);
+    vi.mocked(applicationService.getAll).mockResolvedValue([app1, app2] as any);
     renderPage();
     await waitFor(() => expect(screen.getByText('APP-20250115-000001')).toBeInTheDocument());
     expect(screen.getByText('APP-20250116-000002')).toBeInTheDocument();
@@ -91,7 +84,7 @@ describe('ApplicationListPage', () => {
 
   it('shows exactly one demo badge', async () => {
     mockRole('ADMIN');
-    vi.mocked(applicationService.getAll).mockResolvedValue([app1]);
+    vi.mocked(applicationService.getAll).mockResolvedValue([app1] as any);
     renderPage();
     await waitFor(() => screen.getByText('APP-20250115-000001'));
     expect(screen.getAllByTestId('demo-badge')).toHaveLength(1);
@@ -106,11 +99,11 @@ describe('ApplicationListPage', () => {
     const fromInput = screen.getByLabelText(/submission date from/i);
     const toInput = screen.getByLabelText(/submission date to/i);
 
-    await userEvent.type(fromInput, '2025-02-01');
-    await userEvent.type(toInput, '2025-01-01');
+    fireEvent.change(fromInput, { target: { value: '2025-02-01' } });
+    fireEvent.change(toInput, { target: { value: '2025-01-01' } });
 
     await waitFor(() =>
-      expect(screen.getAllByRole('alert').length).toBeGreaterThanOrEqual(1)
+      expect(screen.getByRole('alert')).toBeInTheDocument()
     );
   });
 });

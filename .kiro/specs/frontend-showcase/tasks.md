@@ -173,38 +173,38 @@ regional chart labels. Every page backed by demo data shows `<DemoBadge />`.
 
 ---
 
-- [ ] 8. Tests
-  - [-] 8.1 `features/dashboard/pages/__tests__/DashboardPage.test.tsx`
+- [x] 8. Tests
+  - [x] 8.1 `features/dashboard/pages/__tests__/DashboardPage.test.tsx`
     - Renders correct role dashboard for each of 5 roles
     - Loading skeleton visible while loading; demo badge present exactly once; `<PermissionDeniedState>` for unknown role
     - `GET /regions` failure → error scoped to chart panel; stat cards still visible
     - _Requirements: 1.1, 1.3, 1.12, 1.13, 1.14, 10.1–10.5_
-  - [-] 8.2 `features/schemes/pages/__tests__/SchemeListPage.test.tsx`
+  - [x] 8.2 `features/schemes/pages/__tests__/SchemeListPage.test.tsx`
     - Loading / empty / error / data states via `QueryState` branch coverage
     - Demo badge present exactly once; search and status filter reduce visible rows; pagination updates on filter change
     - _Requirements: 2.1–2.8, 10.1–10.5_
-  - [ ] 8.3 `features/schemes/pages/__tests__/SchemeDetailPage.test.tsx`
+  - [x] 8.3 `features/schemes/pages/__tests__/SchemeDetailPage.test.tsx`
     - Loading / empty state; eligibility criteria rendered; ADMIN "Edit" button disabled; demo badge present
     - _Requirements: 3.1–3.6, 10.1–10.5_
-  - [ ] 8.4 `features/beneficiaries/pages/__tests__/BeneficiaryListPage.test.tsx`
+  - [x] 8.4 `features/beneficiaries/pages/__tests__/BeneficiaryListPage.test.tsx`
     - `<PermissionDeniedState>` for BENEFICIARY role; loading / empty / data states; demo badge present
     - Search filters by name and reference ID; status filter reduces rows; `nationalId`/`ssn` absent from list
     - _Requirements: 4.1–4.9, 10.1–10.5_
-  - [ ] 8.5 `features/beneficiaries/pages/__tests__/BeneficiaryDetailPage.test.tsx`
+  - [x] 8.5 `features/beneficiaries/pages/__tests__/BeneficiaryDetailPage.test.tsx`
     - Identity fields rendered via `maskField`; application history renders; empty state on unknown ID; demo badge present
     - _Requirements: 5.2–5.7, 10.1–10.5_
-  - [ ] 8.6 `features/beneficiaries/pages/__tests__/BeneficiaryProfilePage.test.tsx`
+  - [x] 8.6 `features/beneficiaries/pages/__tests__/BeneficiaryProfilePage.test.tsx`
     - Shows stored (pre-masked) identity fields; demo badge present; loading skeletons while loading
     - _Requirements: 5.1, 5.3, 5.6, 10.1–10.5_
-  - [ ] 8.7 `features/applications/pages/__tests__/ApplicationListPage.test.tsx`
+  - [x] 8.7 `features/applications/pages/__tests__/ApplicationListPage.test.tsx`
     - Render once per role with mocked applications; assert only role-scoped rows visible and out-of-scope rows absent (by reference number)
     - Date range error when fromDate > toDate; sort toggles on column header click; demo badge present
     - Loading / empty / data states
     - _Requirements: 6.1–6.13, 10.1–10.5_
-  - [ ] 8.8 `features/applications/pages/__tests__/ApplicationDetailPage.test.tsx`
+  - [x] 8.8 `features/applications/pages/__tests__/ApplicationDetailPage.test.tsx`
     - Timeline renders sorted ascending; workflow actions disabled with no click handler; BENEFICIARY ownership guard; empty state on unknown ID; demo badge present
     - _Requirements: 7.1–7.8, 10.1–10.5_
-  - [ ] 8.9 `features/applications/pages/__tests__/SubmitApplicationPage.test.tsx`
+  - [x] 8.9 `features/applications/pages/__tests__/SubmitApplicationPage.test.tsx`
     - Non-BENEFICIARY → permission denied state, no form
     - Invalid field → inline error visible; `addApplication` not called
     - Amount outside scheme range → inline error on `requestedAmount`
@@ -213,7 +213,7 @@ regional chart labels. Every page backed by demo data shows `<DemoBadge />`.
     - Demo badge present
     - _Requirements: 8.1–8.8, 10.1–10.6_
 
-- [ ] 9. Final checkpoint — full test run
+- [x] 9. Final checkpoint — full test run
   - Run `npm run test -- --run` and confirm zero failing tests across all test files.
   - _Requirements: 10.7_
 

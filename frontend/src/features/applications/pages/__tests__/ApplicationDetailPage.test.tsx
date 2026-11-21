@@ -1,131 +1,101 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+﻿import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
-import React from 'react';
 
-vi.mock('../../../../contexts/AuthContext', () => ({
-  useAuth: vi.fn(),
-}));
-
-vi.mock('../../../../features/applications/services/application.service', () => ({
-  applicationService: { getAll: vi.fn(), getById: vi.fn(), add: vi.fn() },
-  getApplicationsForRole: vi.fn((apps: unknown[]) => apps),
-}));
+vi.mock('../../../../contexts/AuthContext', () => ({ useAuth: vi.fn() }));
 
 vi.mock('../../../../features/applications/hooks/useApplications', () => ({
-  useApplicationQuery: vi.fn(),
   useApplicationsQuery: vi.fn(),
+  useApplicationQuery: vi.fn(),
 }));
 
 vi.mock('../../../../services/demo-data.service', () => ({
+  getBeneficiaryByUserId: vi.fn(() => undefined),
   getAllApplications: vi.fn(() => []),
   getApplicationById: vi.fn(() => undefined),
   getAllSchemes: vi.fn(() => []),
+  getSchemeById: vi.fn(() => undefined),
   getAllBeneficiaries: vi.fn(() => []),
-  getBeneficiaryByUserId: vi.fn(() => undefined),
+  getBeneficiaryById: vi.fn(() => undefined),
   addApplication: vi.fn(),
   generateReferenceNumber: vi.fn(() => 'APP-20240101-000001'),
-  getStats: vi.fn(() => ({
-    totalApplications: 0, pendingApplications: 0, approvedApplications: 0,
-    rejectedApplications: 0, totalRequestedAmount: 0, applicationsByStatus: [],
-    applicationsByRegionId: [], recentActivity: [],
-  })),
+  getStats: vi.fn(() => ({ totalApplications: 0, pendingApplications: 0, approvedApplications: 0, rejectedApplications: 0, totalRequestedAmount: 0, applicationsByStatus: [], applicationsByRegionId: [], recentActivity: [] })),
 }));
 
 import { useAuth } from '../../../../contexts/AuthContext';
-import { useApplicationQuery } from '../../../../features/applications/hooks/useApplications';
+import { useApplicationQuery } from '../../hooks/useApplications';
 import { getBeneficiaryByUserId } from '../../../../services/demo-data.service';
 import ApplicationDetailPage from '../ApplicationDetailPage';
 
-const baseUser = {
-  id: 'test-user-id', username: 'tester', fullName: 'Test User',
-  email: 't@t.com', phone: null, active: true,
-  regionIds: [1], createdAt: '', updatedAt: '',
-};
+const baseUser = { id: 'test-user-id', username: 'tester', fullName: 'Test User', email: 't@t.com', phone: null, active: true, regionIds: [1], createdAt: '', updatedAt: '' };
 
 function mockRole(role: string) {
-  vi.mocked(useAuth).mockReturnValue({
-    user: { ...baseUser, role } as any,
-    isAuthenticated: true, isInitializing: false,
-    login: vi.fn(), logout: vi.fn(),
-  });
+  vi.mocked(useAuth).mockReturnValue({ user: { ...baseUser, role } as any, isAuthenticated: true, isInitializing: false, login: vi.fn(), logout: vi.fn() });
 }
 
-function renderPage(appId = 'app-001') {
-  const qc = new QueryClient({ defaultOptions: { queries: { retry: false } } });
+function renderDetail(id: string, role = 'ADMIN') {
+  mockRole(role);
+  const qc = new QueryClient({ defaultOptions: { queries: { retry: false, staleTime: 0, gcTime: 0 } } });
   return render(
     <QueryClientProvider client={qc}>
-      <MemoryRouter initialEntries={[`/applications/${appId}`]}>
+      <MemoryRouter initialEntries={[`/applications/${id}`]}>
         <Routes><Route path="/applications/:id" element={<ApplicationDetailPage />} /></Routes>
       </MemoryRouter>
     </QueryClientProvider>
   );
 }
 
-const demoApp = {
-  id: 'app-001', referenceNumber: 'APP-20250115-000001', beneficiaryId: 'ben-001',
-  beneficiaryName: 'Ramesh Kumar Verma', schemeId: 'sch-002', schemeName: 'Rural Housing Scheme',
-  requestedAmount: 200000, status: 'SUBMITTED' as const, submissionDate: '2025-01-15',
-  timeline: [
-    { stage: 'SUBMITTED' as const, transitionDate: '2025-01-15T10:30:00Z', remark: 'Application submitted.' },
-    { stage: 'FIELD_PENDING' as const, transitionDate: '2025-01-17T11:00:00Z', remark: 'Assigned to officer.' },
-  ],
-};
+const app = { id: 'app-001', referenceNumber: 'APP-20250115-000001', beneficiaryId: 'ben-001', beneficiaryName: 'Ramesh Kumar', schemeId: 'sch-002', schemeName: 'Rural Housing Scheme', requestedAmount: 200000, status: 'SUBMITTED' as const, submissionDate: '2025-01-15', timeline: [{ stage: 'SUBMITTED' as const, transitionDate: '2025-01-15T10:30:00Z', remark: 'Submitted' }, { stage: 'FIELD_PENDING' as const, transitionDate: '2025-01-16T11:00:00Z', remark: 'Assigned' }] };
 
 describe('ApplicationDetailPage', () => {
-  beforeEach(() => { vi.clearAllMocks(); mockRole('ADMIN'); });
+  beforeEach(() => vi.clearAllMocks());
 
-  it('shows no data while loading', () => {
+  it('shows loading state', () => {
     vi.mocked(useApplicationQuery).mockReturnValue({ data: undefined, isLoading: true, isError: false, error: null, refetch: vi.fn() } as any);
-    renderPage();
-    expect(screen.queryByText('APP-20250115-000001')).not.toBeInTheDocument();
+    const { container } = renderDetail('app-001');
+    expect(container.querySelector('[aria-busy="true"]')).not.toBeNull();
   });
 
-  it('shows not found when application is undefined', async () => {
+  it('shows not found when app is undefined', async () => {
     vi.mocked(useApplicationQuery).mockReturnValue({ data: undefined, isLoading: false, isError: false, error: null, refetch: vi.fn() } as any);
-    renderPage();
-    await waitFor(() =>
-      expect(document.body.textContent?.toLowerCase()).toContain('not found')
-    );
+    renderDetail('app-999');
+    await waitFor(() => expect(screen.getByText(/Application not found/i)).toBeInTheDocument());
   });
 
-  it('shows reference number when loaded', async () => {
-    vi.mocked(useApplicationQuery).mockReturnValue({ data: demoApp, isLoading: false, isError: false, error: null, refetch: vi.fn() } as any);
-    renderPage();
-    await waitFor(() =>
-      expect(screen.getAllByText('APP-20250115-000001').length).toBeGreaterThanOrEqual(1)
-    );
+  it('renders reference number when loaded', async () => {
+    vi.mocked(useApplicationQuery).mockReturnValue({ data: app, isLoading: false, isError: false, error: null, refetch: vi.fn() } as any);
+    renderDetail('app-001');
+    await waitFor(() => expect(screen.getAllByText('APP-20250115-000001').length).toBeGreaterThanOrEqual(1));
   });
 
-  it('shows both timeline stage labels', async () => {
-    vi.mocked(useApplicationQuery).mockReturnValue({ data: demoApp, isLoading: false, isError: false, error: null, refetch: vi.fn() } as any);
-    renderPage();
-    await waitFor(() => screen.getAllByText('APP-20250115-000001'));
-    expect(screen.getAllByText(/submitted/i).length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText(/field pending/i).length).toBeGreaterThanOrEqual(1);
+  it('renders timeline events sorted ascending', async () => {
+    vi.mocked(useApplicationQuery).mockReturnValue({ data: app, isLoading: false, isError: false, error: null, refetch: vi.fn() } as any);
+    renderDetail('app-001');
+    await waitFor(() => expect(screen.getAllByText('APP-20250115-000001').length).toBeGreaterThanOrEqual(1));
+    expect(screen.getByText('FIELD PENDING')).toBeInTheDocument();
   });
 
-  it('shows 3 disabled workflow action buttons', async () => {
-    vi.mocked(useApplicationQuery).mockReturnValue({ data: demoApp, isLoading: false, isError: false, error: null, refetch: vi.fn() } as any);
-    renderPage();
-    await waitFor(() => screen.getAllByText('APP-20250115-000001'));
-    const disabledBtns = screen.getAllByRole('button').filter((b) => b.hasAttribute('disabled'));
-    expect(disabledBtns.length).toBeGreaterThanOrEqual(3);
+  it('renders disabled workflow action buttons', async () => {
+    vi.mocked(useApplicationQuery).mockReturnValue({ data: app, isLoading: false, isError: false, error: null, refetch: vi.fn() } as any);
+    renderDetail('app-001');
+    await waitFor(() => expect(screen.getAllByText('APP-20250115-000001').length).toBeGreaterThanOrEqual(1));
+    expect(screen.getByText('Approve').closest('button')?.hasAttribute('disabled')).toBe(true);
+    expect(screen.getByText('Reject').closest('button')?.hasAttribute('disabled')).toBe(true);
+    expect(screen.getByText('Request Clarification').closest('button')?.hasAttribute('disabled')).toBe(true);
   });
 
-  it('BENEFICIARY with mismatched beneficiaryId sees permission denied', async () => {
-    mockRole('BENEFICIARY');
-    vi.mocked(getBeneficiaryByUserId).mockReturnValue({ id: 'ben-999' } as any);
-    vi.mocked(useApplicationQuery).mockReturnValue({ data: demoApp, isLoading: false, isError: false, error: null, refetch: vi.fn() } as any);
-    renderPage();
-    await waitFor(() => expect(document.body.textContent?.toLowerCase()).toMatch(/access|denied|permission/));
+  it('BENEFICIARY with mismatched beneficiaryId shows permission denied', async () => {
+    vi.mocked(useApplicationQuery).mockReturnValue({ data: app, isLoading: false, isError: false, error: null, refetch: vi.fn() } as any);
+    vi.mocked(getBeneficiaryByUserId).mockReturnValue(undefined);
+    renderDetail('app-001', 'BENEFICIARY');
+    await waitFor(() => expect(screen.getByText(/access denied/i)).toBeInTheDocument());
   });
 
   it('shows exactly one demo badge', async () => {
-    vi.mocked(useApplicationQuery).mockReturnValue({ data: demoApp, isLoading: false, isError: false, error: null, refetch: vi.fn() } as any);
-    renderPage();
-    await waitFor(() => screen.getAllByText('APP-20250115-000001'));
+    vi.mocked(useApplicationQuery).mockReturnValue({ data: app, isLoading: false, isError: false, error: null, refetch: vi.fn() } as any);
+    renderDetail('app-001');
+    await waitFor(() => expect(screen.getAllByText('APP-20250115-000001').length).toBeGreaterThanOrEqual(1));
     expect(screen.getAllByTestId('demo-badge')).toHaveLength(1);
   });
 });

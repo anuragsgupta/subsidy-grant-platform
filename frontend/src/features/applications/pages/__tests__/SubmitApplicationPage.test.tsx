@@ -1,20 +1,15 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+﻿import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { MemoryRouter } from 'react-router-dom';
-import React from 'react';
 
-vi.mock('../../../../contexts/AuthContext', () => ({
-  useAuth: vi.fn(),
-}));
+vi.mock('sonner', () => ({ toast: { success: vi.fn(), error: vi.fn() } }));
 
-vi.mock('sonner', () => ({
-  toast: { success: vi.fn(), error: vi.fn() },
-}));
+vi.mock('../../../../contexts/AuthContext', () => ({ useAuth: vi.fn() }));
 
-vi.mock('../../../../features/schemes/services/scheme.service', () => ({
-  schemeService: { getAll: vi.fn(), getById: vi.fn() },
+vi.mock('../../../../features/schemes/hooks/useSchemes', () => ({
+  useSchemesQuery: vi.fn(),
+  useSchemeQuery: vi.fn(),
 }));
 
 vi.mock('../../../../features/beneficiaries/services/beneficiary.service', () => ({
@@ -24,120 +19,75 @@ vi.mock('../../../../features/beneficiaries/services/beneficiary.service', () =>
 vi.mock('../../../../services/demo-data.service', () => ({
   getAllSchemes: vi.fn(() => []),
   getSchemeById: vi.fn(() => undefined),
+  getAllBeneficiaries: vi.fn(() => []),
+  getBeneficiaryById: vi.fn(() => undefined),
+  getBeneficiaryByUserId: vi.fn(() => undefined),
   getAllApplications: vi.fn(() => []),
   getApplicationById: vi.fn(() => undefined),
-  getAllBeneficiaries: vi.fn(() => []),
-  getBeneficiaryByUserId: vi.fn(() => undefined),
   addApplication: vi.fn(),
   generateReferenceNumber: vi.fn(() => 'APP-20240101-000001'),
-  getStats: vi.fn(() => ({
-    totalApplications: 0, pendingApplications: 0, approvedApplications: 0,
-    rejectedApplications: 0, totalRequestedAmount: 0, applicationsByStatus: [],
-    applicationsByRegionId: [], recentActivity: [],
-  })),
+  getStats: vi.fn(() => ({ totalApplications: 0, pendingApplications: 0, approvedApplications: 0, rejectedApplications: 0, totalRequestedAmount: 0, applicationsByStatus: [], applicationsByRegionId: [], recentActivity: [] })),
 }));
 
 import { useAuth } from '../../../../contexts/AuthContext';
-import { schemeService } from '../../../../features/schemes/services/scheme.service';
-import { beneficiaryService } from '../../../../features/beneficiaries/services/beneficiary.service';
-import { addApplication, getSchemeById } from '../../../../services/demo-data.service';
+import { useSchemesQuery } from '../../../schemes/hooks/useSchemes';
+import { beneficiaryService } from '../../../beneficiaries/services/beneficiary.service';
+import { addApplication, generateReferenceNumber, getAllApplications, getSchemeById } from '../../../../services/demo-data.service';
+import { toast } from 'sonner';
 import SubmitApplicationPage from '../SubmitApplicationPage';
 
-const baseUser = {
-  id: 'test-user-id', username: 'tester', fullName: 'Test User',
-  email: 't@t.com', phone: null, active: true,
-  regionIds: [1], createdAt: '', updatedAt: '',
-};
+const baseUser = { id: 'test-user-id', username: 'tester', fullName: 'Test User', email: 't@t.com', phone: null, active: true, regionIds: [1], createdAt: '', updatedAt: '' };
 
 function mockRole(role: string) {
-  vi.mocked(useAuth).mockReturnValue({
-    user: { ...baseUser, role } as any,
-    isAuthenticated: true, isInitializing: false,
-    login: vi.fn(), logout: vi.fn(),
-  });
+  vi.mocked(useAuth).mockReturnValue({ user: { ...baseUser, role } as any, isAuthenticated: true, isInitializing: false, login: vi.fn(), logout: vi.fn() });
 }
 
 function renderPage() {
-  const qc = new QueryClient({ defaultOptions: { queries: { retry: false } } });
-  return render(
-    <QueryClientProvider client={qc}>
-      <MemoryRouter><SubmitApplicationPage /></MemoryRouter>
-    </QueryClientProvider>
-  );
+  const qc = new QueryClient({ defaultOptions: { queries: { retry: false, staleTime: 0, gcTime: 0 } } });
+  return render(<QueryClientProvider client={qc}><MemoryRouter><SubmitApplicationPage /></MemoryRouter></QueryClientProvider>);
 }
 
-const openScheme = {
-  id: 'sch-002', code: 'RHS-002', name: 'Rural Housing Scheme',
-  status: 'OPEN' as const, minGrantAmount: 120000, maxGrantAmount: 250000,
-  startDate: '2024-10-01', endDate: '2026-03-31', description: '', eligibilityCriteria: [],
-};
+const scheme = { id: 'sch-002', code: 'RHS-002', name: 'Rural Housing Scheme', status: 'OPEN' as const, minGrantAmount: 120000, maxGrantAmount: 250000, startDate: '2024-10-01', endDate: '2026-03-31', description: '', eligibilityCriteria: [] };
 
 describe('SubmitApplicationPage', () => {
-  beforeEach(() => vi.clearAllMocks());
+  beforeEach(() => { vi.clearAllMocks(); mockRole('BENEFICIARY'); vi.mocked(useSchemesQuery).mockReturnValue({ data: [scheme], isLoading: false, isError: false, error: null, refetch: vi.fn() } as any); });
 
-  it('ADMIN role sees permission denied state without form', () => {
+  it('ADMIN role shows permission denied, no form', () => {
     mockRole('ADMIN');
-    vi.mocked(schemeService.getAll).mockResolvedValue([]);
     renderPage();
-    expect(document.body.textContent?.toLowerCase()).toMatch(/access|denied|permission/);
-    expect(screen.queryByRole('combobox')).not.toBeInTheDocument();
+    expect(screen.getByText(/access denied/i)).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /submit application/i })).not.toBeInTheDocument();
   });
 
-  it('BENEFICIARY sees form with submit button', async () => {
-    mockRole('BENEFICIARY');
-    vi.mocked(schemeService.getAll).mockResolvedValue([openScheme]);
+  it('BENEFICIARY role renders form with submit button', () => {
     renderPage();
-    await waitFor(() => expect(screen.getByRole('button', { name: /submit application/i })).toBeInTheDocument());
-    expect(screen.getByRole('combobox')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /submit application/i })).toBeInTheDocument();
   });
 
-  it('shows exactly one demo badge', async () => {
-    mockRole('BENEFICIARY');
-    vi.mocked(schemeService.getAll).mockResolvedValue([openScheme]);
+  it('shows exactly one demo badge', () => {
     renderPage();
-    await waitFor(() => screen.getByRole('button', { name: /submit application/i }));
     expect(screen.getAllByTestId('demo-badge')).toHaveLength(1);
   });
 
-  it('shows validation error on empty submit and does not call addApplication', async () => {
-    mockRole('BENEFICIARY');
-    vi.mocked(schemeService.getAll).mockResolvedValue([openScheme]);
+  it('invalid submit shows validation error and does not call addApplication', async () => {
     renderPage();
-    await waitFor(() => screen.getByRole('button', { name: /submit application/i }));
-
-    await userEvent.click(screen.getByRole('button', { name: /submit application/i }));
-
-    await waitFor(() =>
-      expect(screen.getAllByRole('alert').length).toBeGreaterThanOrEqual(1)
-    );
+    fireEvent.click(screen.getByRole('button', { name: /submit application/i }));
+    await waitFor(() => expect(screen.getByText(/select a scheme/i)).toBeInTheDocument());
     expect(vi.mocked(addApplication)).not.toHaveBeenCalled();
   });
 
-  it('calls addApplication once on valid submit', async () => {
-    mockRole('BENEFICIARY');
-    vi.mocked(schemeService.getAll).mockResolvedValue([openScheme]);
-    vi.mocked(getSchemeById).mockReturnValue(openScheme);
-    vi.mocked(beneficiaryService.getByUserId).mockResolvedValue({
-      id: 'ben-001', referenceId: 'BEN/001', fullName: 'Test User',
-      type: 'INDIVIDUAL', regionId: 1, regionName: 'North',
-      email: 't@t.com', phone: '123', status: 'ACTIVE',
-      nationalId: '****4521', ssn: '****8832', linkedUserId: 'test-user-id',
-    } as any);
+  it('valid submit calls addApplication once and shows success toast', async () => {
+    vi.mocked(getSchemeById).mockReturnValue(scheme as any);
+    vi.mocked(beneficiaryService.getByUserId).mockResolvedValue({ id: 'ben-001', fullName: 'Ramesh Kumar' } as any);
+    vi.mocked(getAllApplications).mockReturnValue([]);
+    vi.mocked(generateReferenceNumber).mockReturnValue('APP-20240101-000001');
 
     renderPage();
-    await waitFor(() => screen.getByRole('button', { name: /submit application/i }));
+    fireEvent.change(screen.getByLabelText(/scheme/i), { target: { value: 'sch-002' } });
+    fireEvent.change(screen.getByLabelText(/requested amount/i), { target: { value: '150000' } });
+    fireEvent.click(screen.getByRole('button', { name: /submit application/i }));
 
-    // Select the scheme
-    const select = screen.getByRole('combobox');
-    await userEvent.selectOptions(select, 'sch-002');
-
-    // Enter a valid amount
-    const amountInput = screen.getByLabelText(/requested amount/i);
-    await userEvent.clear(amountInput);
-    await userEvent.type(amountInput, '150000');
-
-    await userEvent.click(screen.getByRole('button', { name: /submit application/i }));
-
-    await waitFor(() => expect(vi.mocked(addApplication)).toHaveBeenCalledOnce());
+    await waitFor(() => expect(vi.mocked(addApplication)).toHaveBeenCalledTimes(1));
+    expect(vi.mocked(toast.success)).toHaveBeenCalled();
   });
 });
