@@ -1,0 +1,391 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1.1 Create `src/services/workflow-demo-data.service.ts` with all TypeScript types and static fixtures": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262564196
+      },
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262574341
+      },
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262593988
+      },
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262600197
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795263510350
+      }
+    ],
+    "2.1 Create `src/features/eligibility/types/eligibility.types.ts` — re-export from workflow-demo-data": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262564393
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795263518774
+      }
+    ],
+    "2.2 Create `src/features/eligibility/services/eligibility.service.ts` — wraps demo calls in `Promise.resolve`": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262564557
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795263519027
+      }
+    ],
+    "2.3 Create `src/features/eligibility/hooks/useEligibility.ts` — `useAssessmentsQuery`, `useAssessmentQuery(applicationId)`, `useCriteriaQuery(schemeId)` with `staleTime: Infinity`": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262564907
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795263519209
+      }
+    ],
+    "2.4 Create `src/features/eligibility/components/AssessmentDecisionBadge.tsx` — coloured badge per decision": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262565042
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795263519366
+      }
+    ],
+    "2.5 Create `src/features/eligibility/components/CriterionResultTable.tsx` — table of criterion results": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262565183
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795263519585
+      }
+    ],
+    "2.6 Create `src/features/eligibility/pages/EligibilityListPage.tsx` — assessment history table with decision filter, DemoBadge, loading/empty states, permission denied for non-ADMIN/DISTRICT_OFFICER": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262565353
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795263525031
+      }
+    ],
+    "2.7 Create `src/features/eligibility/pages/EligibilityCriteriaPage.tsx` — criteria view for a scheme, DemoBadge, loading/empty states": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262565501
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795263525270
+      }
+    ],
+    "2.8 Create `src/features/eligibility/pages/EligibilityResultPage.tsx` — assessment result with decision badge, criterion table, failure reasons, manual review indicator, incomplete info message, DemoBadge, loading/empty states": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262565667
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795263525427
+      }
+    ],
+    "3.1 Create `src/features/verification/types/verification.types.ts` — re-export from workflow-demo-data": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262565820
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795263525970
+      }
+    ],
+    "3.2 Create `src/features/verification/services/verification.service.ts` — wraps demo calls, exports `getTasksForRole`": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262565968
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795263526181
+      }
+    ],
+    "3.3 Create `src/features/verification/hooks/useVerification.ts` — `useVerificationTasksQuery`, `useVerificationTaskQuery(id)` with `staleTime: Infinity`": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262566115
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795263536683
+      }
+    ],
+    "3.4 Create `src/features/verification/schemas/field-verification.schema.ts` — Zod schema for field verification form": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262566253
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795263537192
+      }
+    ],
+    "3.5 Create `src/features/verification/components/ConfirmActionDialog.tsx` — reusable confirmation dialog": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262566401
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795263537453
+      }
+    ],
+    "3.6 Create `src/features/verification/components/WorkflowHistoryTimeline.tsx` — sorted ascending timeline, current stage highlighted": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262566536
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795263537919
+      }
+    ],
+    "3.7 Create `src/features/verification/components/FieldVerificationForm.tsx` — react-hook-form + zod, finding/remarks/evidence/recommendation fields, validation, toast on success": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262566680
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795263538317
+      }
+    ],
+    "3.8 Create `src/features/verification/components/DistrictReviewPanel.tsx` — field report read-only, approve/reject/clarification with ConfirmActionDialog": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262566823
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795263545396
+      }
+    ],
+    "3.9 Create `src/features/verification/pages/VerificationQueuePage.tsx` — task table with stage filter, role-scope, DemoBadge, loading/empty states, permission denied": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262566960
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795263545619
+      }
+    ],
+    "3.10 Create `src/features/verification/pages/VerificationDetailPage.tsx` — task details, field form or district panel based on stage, workflow history timeline, DemoBadge, loading/empty/permission-denied states": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262567128
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795263546063
+      }
+    ],
+    "4.1 Update `src/app/router.tsx` — replace `/verification` placeholder with `VerificationQueuePage`, add `/verification/:taskId`, add `/eligibility`, `/eligibility/schemes/:schemeId`, `/eligibility/applications/:applicationId` routes": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262567273
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795263546324
+      }
+    ],
+    "4.2 Update `src/components/layout/Sidebar.tsx` — add \"Eligibility\" nav item for ADMIN and DISTRICT_OFFICER, remove `comingSoon` flag from \"Verification Tasks\"": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262567470
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795263546467
+      }
+    ],
+    "5. Build verification": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262567708
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795263873727
+      }
+    ],
+    "6.1 `features/eligibility/pages/__tests__/EligibilityListPage.test.tsx` — loading, empty, data, decision filter, demo badge, permission denied": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262567848
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795264274624
+      }
+    ],
+    "6.2 `features/eligibility/pages/__tests__/EligibilityCriteriaPage.test.tsx` — loading, empty, data, demo badge": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262568005
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795264275085
+      }
+    ],
+    "6.3 `features/eligibility/pages/__tests__/EligibilityResultPage.test.tsx` — loading, not found, data, failure reasons, demo badge": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262568159
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795264275358
+      }
+    ],
+    "6.4 `features/verification/pages/__tests__/VerificationQueuePage.test.tsx` — loading, empty, data, stage filter, demo badge, permission denied": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262568311
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795264275575
+      }
+    ],
+    "6.5 `features/verification/pages/__tests__/VerificationDetailPage.test.tsx` — loading, not found, field form, district panel, confirm dialog, workflow history, demo badge, permission denied": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262568456
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795264275836
+      }
+    ],
+    "7. Final test run": [
+      {
+        "executionId": "686f7bdf-9c03-4da5-b9fa-93f8cf559cf1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795262568608
+      },
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795264276406
+      }
+    ],
+    "1. Workflow demo data layer": [
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795263510621
+      }
+    ],
+    "2. Eligibility module": [
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795263525530
+      }
+    ],
+    "3. Verification module": [
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795263546182
+      }
+    ],
+    "4. Router and sidebar updates": [
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795263546572
+      }
+    ],
+    "6. Tests": [
+      {
+        "executionId": "5ce24a6c-95dc-47c0-a4a4-5e7a1eddfcb1",
+        "chatSessionId": "sess_6e3ea408-5c7e-4dfc-a18f-5423385b1958",
+        "timestamp": 1795264276168
+      }
+    ]
+  }
+}

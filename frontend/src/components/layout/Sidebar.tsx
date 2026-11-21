@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard,
@@ -49,7 +49,8 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Schemes', href: '/schemes', icon: FileText, roles: ['ADMIN', 'BENEFICIARY'] },
   { label: 'Beneficiaries', href: '/admin/beneficiaries', icon: Users, roles: ['ADMIN'] },
   { label: 'Applications', href: '/applications', icon: ClipboardList, roles: ['ADMIN', 'BENEFICIARY'] },
-  { label: 'Verification Tasks', href: '/verification', icon: CheckSquare, roles: ['ADMIN', 'FIELD_OFFICER'], comingSoon: true },
+  { label: 'Eligibility', href: '/eligibility', icon: ShieldCheck, roles: ['ADMIN', 'DISTRICT_OFFICER'] },
+  { label: 'Verification Tasks', href: '/verification', icon: CheckSquare, roles: ['ADMIN', 'FIELD_OFFICER', 'DISTRICT_OFFICER'] },
   { label: 'Application Queue', href: '/district/queue', icon: ClipboardList, roles: ['ADMIN', 'DISTRICT_OFFICER'], comingSoon: true },
   { label: 'Finance Queue', href: '/finance/queue', icon: Banknote, roles: ['ADMIN', 'FINANCE_APPROVER'], comingSoon: true },
   { label: 'Disbursement', href: '/disbursement', icon: Banknote, roles: ['ADMIN'], comingSoon: true },
@@ -172,7 +173,7 @@ export function Sidebar() {
             <SidebarLink key={item.href} item={item} collapsed={collapsed} />
           ))}
 
-          {/* Admin section divider — only if admin items exist */}
+          {/* Admin section divider â€” only if admin items exist */}
           {adminItems.length > 0 && (
             <>
               <div className="my-2 border-t border-gov-border/40" />
