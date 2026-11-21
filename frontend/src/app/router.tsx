@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom';
+﻿import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
 import type { ComponentType } from 'react';
 import { AppShell } from '../components/layout/AppShell';
@@ -8,7 +8,7 @@ import { ROLE_DEFAULT_ROUTES } from '../types/auth';
 import { NotFoundPage } from '../features/common/NotFoundPage';
 import { PlaceholderPage } from '../features/placeholders/PlaceholderPage';
 
-const loadingFallback = <div className="p-6 text-text-secondary">Loading…</div>;
+const loadingFallback = <div className="p-6 text-text-secondary">Loadingâ€¦</div>;
 
 function lazyPage(factory: () => Promise<{ default: ComponentType }>) {
   const Component = lazy(factory);
@@ -37,7 +37,7 @@ export const router = createBrowserRouter([
     element: lazyPage(() => import('../features/auth/pages/RegisterPage')),
   },
 
-  // Protected routes — wrapped in ProtectedRoute, rendered inside AppShell
+  // Protected routes â€” wrapped in ProtectedRoute, rendered inside AppShell
   {
     path: '/',
     element: <ProtectedRoute />,
@@ -72,7 +72,11 @@ export const router = createBrowserRouter([
           { path: 'finance/dashboard', element: lazyPage(() => import('../features/dashboard/pages/DashboardPage')) },
 
           // Placeholder sections
-          { path: 'verification', element: <PlaceholderPage title="Verification" description="This feature is coming soon." /> },
+          { path: 'verification', element: lazyPage(() => import('../features/verification/pages/VerificationQueuePage')) },
+          { path: 'verification/:taskId', element: lazyPage(() => import('../features/verification/pages/VerificationDetailPage')) },
+          { path: 'eligibility', element: lazyPage(() => import('../features/eligibility/pages/EligibilityListPage')) },
+          { path: 'eligibility/schemes/:schemeId', element: lazyPage(() => import('../features/eligibility/pages/EligibilityCriteriaPage')) },
+          { path: 'eligibility/applications/:applicationId', element: lazyPage(() => import('../features/eligibility/pages/EligibilityResultPage')) },
           { path: 'disbursement', element: <PlaceholderPage title="Disbursement" description="This feature is coming soon." /> },
           { path: 'compliance', element: <PlaceholderPage title="Compliance" description="This feature is coming soon." /> },
           { path: 'analytics', element: <PlaceholderPage title="Analytics" description="This feature is coming soon." /> },
